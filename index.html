@@ -1,0 +1,550 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lmagic的个人主页</title>
+    <link rel="shortcut icon" href="images/icons/site.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" media="screen" />
+<style type="text/css">
+@font-face{ 
+font-family: "BazarMedium"; 
+src: url(font/Bazar.ttf); 
+}
+body{
+    background-color:#fff;
+    color:#000;
+    width: 100%;
+    height: 100%;
+    font:62.5%  "KaiTi",Arial,"BazarMedium",'微软雅黑',"Microsoft YaHei", Helvetica, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+.fontbazar{
+    color: #303030;
+    font-family: "BazarMedium";
+}
+.hshadow{
+    text-shadow: 1px 2px #FCFAF7, 3px 4px #484A4D;
+}
+#homebodydiv{
+    background-image: url(images/ps/color1.jpg);
+}
+#logo{
+    width: 100%;
+    height: 130px;
+    position: fixed;
+    top:0px;
+    z-index: 1000;
+    pointer-events:none;
+}
+#logo>a{
+    display: block;
+    width: 130px;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 5px;
+    background-image: url(images/pngs/logo4.png);
+}
+#navdiv{
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    top:0px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.25);
+    background-image: url(images/ps/color1.jpg);
+    z-index: 999;
+}
+#navul{
+    font-size: 30px;
+    color:#F6EDD8;
+    width: 1000px;
+    height: 80px;
+    margin:0 auto;
+}
+.allul>li{
+    display: inline-block;
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    text-align: center;
+    color: #000;
+}
+#navul>li{
+    width: 18%;
+    height: 60px;
+    margin-top: 0px;
+}
+#navul>li>a{
+    height: 60px;
+    line-height: 60px;
+    display: block;
+    color:#F6EDD8;
+    margin-top: 0px;
+}
+#navfirstli{
+    margin-left: -4%;
+}
+.hrstyle{
+    border: none;
+    border-top: 1px dashed rgba(0,0,0,0.25);
+    border-bottom: 1px dashed rgba(255,255,255,0.25);
+}
+#homediv{
+    width: 100%;
+    height: 950px;
+    margin-top: 100px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.25);
+    margin-bottom: -10px;
+}
+#homedivinner{
+    width: 1100px;
+    height: 850px;
+    margin: 0 auto;
+    text-align: center; 
+    color: #000;
+}
+.linediv{
+    border:1px solid #78bbbb;
+}
+#magicdiv{
+    width: 400px;
+    height: 110px;
+    margin: 0 auto;
+    margin-top: 50px;
+    background-color: #78bbbb;
+}
+#magicdiv>p{
+    color: #F6EDD8;
+    font-size:8em;
+    text-shadow: 8px 8px 0 #78bbbb, 13px 13px 0 #000;
+    margin-top: 0px;
+}
+#magicinfodiv{
+    width: 400px;
+    height: 50px;
+    line-height: 50px;
+    margin:0 auto;
+    margin-top: 20px;
+    background-color: #F6EDD8;
+}
+#picdiv{
+    width: 99%;
+    height: 500px;
+    margin-top: 20px;
+    background-color: #fff;
+    border: solid #78bbbb;
+    border-radius: 15px;
+    position: relative;
+    z-index: 998;
+}
+#imgdiv{
+    margin:10px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 98%;
+    height: 88%;
+}
+img{
+    width: 100%;
+    height: 100%;
+}
+#controdiv{
+    position: absolute;
+    top:220px;
+    width: 100%;
+}
+#controdiv>a{
+    display: block;
+    color: #888;
+    width: 35px;
+    height: 70px;
+}
+#controdiv>a#leftlink{
+    float: left;
+    margin-left: 10px;
+}
+#controdiv>a#leftlink>span{
+    background-color: #fff;
+    display: block;
+    height: 70px;
+    border-radius: 0 70px 70px 0;
+}
+#controdiv>a#leftlink>span>i{
+    margin-top: 25px;
+    margin-left: -5px;
+}
+#controdiv>a#rightlink{
+    float: right;
+    margin-right: 10px;
+}
+#controdiv>a#rightlink>span{
+    background-color: #fff;
+    display: block;
+    height: 70px;
+    border-radius: 70px 0 0 70px;
+}
+#controdiv>a#rightlink>span>i{
+    margin-top: 25px;
+    margin-right: -5px;
+}
+#controdiv>a:hover{
+    color:#000;
+}
+.fontsize{
+    font-size: 2em;
+}
+.colorF6EDD8{
+    color: #F6EDD8;
+}
+.fontsizebig{
+    font-size: 5em;
+}
+.projectdiv{
+    background-color: #e6e1d0;
+    background-image: url(images/ps/color2.jpg);
+}
+.projectline{
+    border: solid #e6e1d0;
+    margin-top: 1px;
+}
+.sessiondiv{
+    width: 100%;
+    height: 950px;
+    color: #000;
+    box-shadow: 0 0 5px rgba(0,0,0,0.25);
+    margin-bottom: -10px;
+}
+.sessiondivinner{
+    width: 1100px;
+    height: 850px;
+    margin: 0 auto;
+    text-align: center; 
+}
+.blogdiv{
+    background-color: #e3e0dd;
+    background-image: url(images/ps/color3.jpg);
+}
+.lifediv{
+    background-color: #e68966;
+    background-image: url(images/ps/color4.jpg);
+}
+.projectinner{
+    width: 1100px;
+    height: 270px;
+    margin-bottom: 20px;
+}
+.project{
+    width:260px;
+    height: 260px;
+    border: 1px solid #e6e1d0;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.projectimgdiv{
+    display: block;
+    margin:5px 5px 5px 5px;
+    width: 92%;
+    margin:0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 80%;
+}
+a,span,p{
+    font-weight: bold;
+}
+.projectinner>a{
+    display: inline-block;
+    margin: 3px;
+    color: #000;
+    box-shadow:0 2px 1px #888;
+}
+.seemore{
+    width: 200px;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+.seemore>a{
+    padding-bottom: 3px;
+    font-size: 2em;
+}
+.seemore>a:hover{
+    border-bottom:2px solid #000;
+}
+#tooldiv{
+    position: absolute;
+    margin-top: -100px;
+    background-color: #fff;
+    font-size: 20px;
+}
+#tooldiv>img{
+    width: 550px;
+    height: 500px;
+}
+.blogdivinner{
+    border:2px solid #888;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    height: 895px;
+}
+.titleback{
+    background-color: #78bbbb;
+    height: 50px;
+}
+.titleback>h3{
+    font-size: 25px;
+    margin-left: 20px;
+    background-color: #C8C8C8;
+    height: 50px;
+    line-height:50px;
+}
+.oneblog{
+    font-size: 20px;
+    text-align: left;
+}
+.oneblog>p{
+    display: inline-block;
+    width: 990px;
+    border: 1px solid red;
+    font-weight: normal;
+}
+.oneblog>a{
+    display: inline-block;
+    width: 90px;
+    border:1px solid red;
+    cursor: pointer;
+}
+.oneblog>a:hover{
+    border-bottom:2px solid #000;
+    padding-bottom: 3px;
+}
+</style>
+</head>
+<body>
+  <div id="homebodydiv">
+  <div id="logo">
+      <a href="#"></a>
+  </div>
+  <a name="home"></a>
+  <div id="navdiv">
+    <ul id="navul" class="allul">
+        <li id="navfirstli"><a href="#home">首页</a></li>
+        <li ><a href="#projects">项目</a></li>
+        <li><a href="#"></a></li>
+        <li ><a href="#blog">博客</a></li>
+        <li ><a href="#life">生活</a></li>
+    </ul>
+    <hr class="hrstyle" />
+  </div>
+  <div id="homediv">
+    <div class="linediv" style=" padding-top: 5px;"><hr class="hrstyle" /></div>
+    <div id="homedivinner">
+       <div id="magicdiv"><p class="fontbazar">M A G I C</p></div>
+       <div id="magicinfodiv" class="fontsize">LIFE IS MAGIC</div>
+       <div id="picdiv">
+        <div id="imgdiv">
+           <img src="images/back1.jpg" alt="#" />
+        </div>
+        <span class="fontsize" id="backimginfo">第一张照片介绍</span>
+        <div id="controdiv">
+            <a href="#" id="leftlink"><span><i class="fa fa-chevron-left fa-2x" aria-hidden="true"></span></i></a>
+            <a href="#" id="rightlink"><span><i class="fa fa-chevron-right fa-2x" aria-hidden="true"></span></i></a>
+        </div>  
+       </div>
+       <p class="colorF6EDD8 fontsize">首页介绍</p>
+    </div>
+    <div class="linediv"><hr class="hrstyle" /></div>
+  </div>
+</div>
+
+  <a name="projects"></a>
+  <div class="sessiondiv projectdiv ">
+    <div class="projectline"><hr class="hrstyle" /></div>
+    <div class="sessiondivinner">
+       <p class="fontsizebig fontbazar hshadow">MY PROJECTS</p>
+       <p class="fontsize">项目大标题介绍占位</p>
+       <div class="projectinner">
+            <a href="#" title="简易功能的计算器">
+            <div class="project">
+                <div class="projectimgdiv">
+                   <img src="images/project1.jpg" alt="#" />
+                </div>
+            <span class="fontsize">计算器</span>    
+            </div>
+            </a>
+            <a href="#" title="可倒计时的番茄钟">
+            <div class="project">
+                <div class="projectimgdiv">
+                   <img src="images/project2.jpg" alt="#" />
+                </div>
+            <span class="fontsize">番茄钟</span>    
+            </div>
+            </a>
+            <a href="#" title="可查询全球各地的天气预报">
+            <div class="project">
+                <div class="projectimgdiv">
+                   <img src="images/project3.jpg" alt="#" />
+                </div>
+            <span class="fontsize">天气预报</span>    
+            </div>
+            </a>
+            <a href="#" title="可随机播放的名言警句">
+            <div class="project">
+                <div class="projectimgdiv">
+                   <img src="images/project4.jpg" alt="#" />
+                </div>
+            <span class="fontsize">名言警句</span>    
+            </div>
+            </a>
+       </div>
+       <div class="projectinner">
+            <a href="#" title="简易功能的聊天室">
+            <div class="project">
+                <div class="projectimgdiv">
+                   <img src="images/project9.jpg" alt="#" />
+                </div>
+            <span class="fontsize">聊天室</span>    
+            </div>
+            </a>
+            <a href="#" title="简易功能的弹幕室">
+            <div class="project">
+                <div class="projectimgdiv">
+                   <img src="images/project8.jpg" alt="#" />
+                </div>
+            <span class="fontsize">弹幕室</span>    
+            </div>
+            </a>
+            <a href="#" title="个人首页demo">
+            <div class="project">
+                <div class="projectimgdiv">
+                   <img src="images/demo2.jpg" alt="#" />
+                </div>
+            <span class="fontsize">我的第二个demo</span>    
+            </div>
+            </a>
+            <a href="#" title="我的第一个web网页">
+            <div class="project">
+                <div class="projectimgdiv">
+                   <img src="images/demo1.jpg" alt="#" />
+                </div>
+            <span class="fontsize">我的第一个demo</span>    
+            </div>
+            </a>
+       </div>
+       <div class="seemore">
+           <a href="projectall.html" target="_blank">更多项目</a>
+       </div>
+    </div>
+    <div class="projectline"><hr class="hrstyle" /></div>
+  </div>
+  <a name="blog"></a>
+  <div class="sessiondiv blogdiv">
+    <div class="projectline" style="border-color:#e3e0dd;"><hr class="hrstyle" /></div>
+    <div class="sessiondivinner blogdivinner">
+       <p class="fontsizebig fontbazar hshadow">MY BLOG</p>
+       <div id="blogcontentdiv">
+           <div class="oneblog">
+               <div class="titleback"><h3>图解HTTP之https</h3></div>
+               <p>摘要图解HTTP之cookie图解HTTP之cookie图解HTTP之cookie图解HTTP之cookie图解HTTP之cookie图解HTTP之cookie图解HTTP之cookie图解HTTP之cookie图解HTTP之cookie图解HTTP之cookie图解HTTP之cookie图解HTTP之cookie</p>
+               <a href="blogs/blog_https.html">点击查看</a>
+           </div>
+           <div class="oneblog">
+               <div class="titleback"><h3>图解HTTP之cookie</h3></div>
+               <p>内容</p>
+           </div>
+           <div class="oneblog">
+               <div class="titleback"><h3>标题</h3></div>
+               <p>内容</p>
+           </div>
+           <div class="oneblog">
+               <div class="titleback"><h3>标题</h3></div>
+               <p>内容</p>
+           </div>
+       </div>
+       <div class="seemore">
+           <a href="blog.html">更多博客</a>
+       </div>
+    </div>
+    <div class="projectline" style="border-color:#e3e0dd;"><hr class="hrstyle" /></div>
+  </div>
+
+  <a name="life"></a>
+  <div class="sessiondiv lifediv">
+    <div class="projectline" style="border-color:#e68966;"><hr class="hrstyle"/></div>
+    <div class="sessiondivinner">
+       <p class="fontsizebig fontbazar hshadow">MY LIFE</p>
+    </div>
+    <div class="projectline" style="border-color:#e68966;"><hr class="hrstyle" /></div>
+  </div>
+<script src="scripts/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    var backlist = ["images/back1.jpg","images/back2.jpg","images/back3.jpg","images/back4.jpg","images/back5.jpg"];
+    var backinfo = ["第一张图片介绍","第二张图片介绍","第三张图片介绍","第四张图片介绍","第五张图片介绍"]
+    var backNum = backlist.length;
+    //图片轮播左边点击
+    $("#controdiv>a#leftlink").click(function() {
+        var src = $("#imgdiv>img").attr("src");
+        for(var i=0;i<backNum;i++){
+            if(backlist[i] === src){
+                if(i>0){
+                    $("#imgdiv>img").attr("src",backlist[i-1]);
+                    $("#backimginfo").text(backinfo[i-1]);
+                }else{
+                    $("#imgdiv>img").attr("src",backlist[backNum-1]);
+                    $("#backimginfo").text(backinfo[backNum-1]);
+                }
+            }
+        }
+    });
+    //图片轮播右边点击
+    $("#controdiv>a#rightlink").click(function() {
+        var src = $("#imgdiv>img").attr("src");
+        for(var i=0;i<backNum;i++){
+            if(backlist[i] === src){
+                if(i<backNum-1){
+                    $("#imgdiv>img").attr("src",backlist[i+1]);
+                    $("#backimginfo").text(backinfo[i+1]);
+                }else{
+                    $("#imgdiv>img").attr("src",backlist[0]);
+                    $("#backimginfo").text(backinfo[0]);
+                }
+            }
+        }
+    });
+    //项目小图鼠标划过效果
+    //鼠标滑过的位置有高度差，不知道是什么原因，所以设置了tooldiv的margin-top
+    /*
+    $(".projectinner>a").mouseover(function(e){
+        this.mytitle = this.title;
+        var $p_title = $("<p></p>");
+        var $img = $(this).find('img');
+        var imgsrc = $img.attr("src");
+        this.title ="";
+        var $div = $("<div id='tooldiv'><img src='"+imgsrc+"'></div>");
+        $("body").append($div);
+        $p_title.text(this.mytitle);
+        $div.append($p_title);
+        $("#tooldiv").css({
+            "top":e.pageY+"px",
+            "left":e.pageX+"px"
+        }).show("fast");
+    }).mouseout(function() {
+        $("#tooldiv").remove();
+        $(this).attr("title",this.mytitle);
+    }).mousemove(function(e) {
+        $("#tooldiv").css({
+            "top":e.pageY+"px",
+            "left":e.pageX+"px"
+        });
+    });
+    */
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Lmagic's Weather App</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="scripts/jquery.js" type="text/javascript"></script>
+<link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" media="screen" />
+<style type="text/css">
+body{
+	margin:0;
+	padding:0;
+	background-color:#336699;
+	font:180%  "Roboto",Arial, Helvetica, sans-serif;
+	color:#FFF;
+}
+div#background{
+  height: 100vh;
+  background-color:#336688;
+  border: 2px solid #888;
+}
+div#search{
+	width:50%;
+	margin: 0 auto;
+	text-align: center;
+}
+div#info,div#serachResult{
+	width:50%;
+	margin: 0 auto;
+	text-align: center;
+}
+div#air{
+	border: 2px solid #888;
+}
+p#condition{
+	margin:0;
+	padding:0;
+	color: #FFFF00;
+}
+.searchTemp{
+	color:#CCFF66;
+	font:80% Arial, Helvetica, sans-serif;
+}
+input{
+	width: 170px;
+	height: 25px;
+	font:60% Arial, Helvetica, sans-serif;
+}
+.hide{
+	display: none;
+}
+span#errorInfo{
+	font:70% Arial, Helvetica, sans-serif;
+	color: #FF3333;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	var weatherIcons=["Cloud.svg","Wind.svg","Cloud-Snow-Alt.svg","Cloud-Fog.svg","Sun.svg","Cloud-Rain.svg","Tornado.svg"];
+	var content = "http://www.hubwiz.com/course/55a60445a164dd0d75929fbd/images/icons/";
+	var imgSrc1 = content + weatherIcons[0];
+	var imgSrc2 = content + weatherIcons[1];
+	var imgSrc3 = content + weatherIcons[2];
+	var imgSrc4 = content + weatherIcons[3];
+	var imgSrc5 = content + weatherIcons[4];
+	var imgSrc6 = content + weatherIcons[5];
+	var imgSrc7 = content + weatherIcons[6];
+	//获取本地ip信息，城市名等
+	$.ajax({
+	    url:"http://ipinfo.io/json?",
+	    type:'GET',
+	    dataType:'json',
+	    async:false,//ajax同步
+	    success:function(res){
+	        myip = res.ip;
+	        var myName = res.city+', '+res.region+', '+res.country;
+	        var myLocation = '经纬度：'+res.loc;
+	        var ipText = "本地公网IP：" + myip;
+			$("#cityName").text(myName);
+			$("#location").text(myLocation);
+			$("#ip").text(ipText);
+	    }
+	});
+	var myurl = "https://free-api.heweather.com/v5/weather?key=29df2248f4de473f92cc1a49dd26efa3&city="+encodeURIComponent(myip);
+	//利用ip查询本地天气并显示
+	$.ajax({
+	    url:myurl,
+	    type:'GET',
+	    dataType:'json',
+	    success:function(data){
+	        var myTemp = data.HeWeather5[0].now.tmp;
+	        var tempText = "当前温度："+myTemp+String.fromCharCode(176)+'C';
+	        $("#temp").text(tempText);
+	        var tempCondition = data.HeWeather5[0].now.cond.txt;
+	        $('#condition').text(tempCondition);
+	        //var imgSrc = content + weatherIcons[5];
+	       // $("img#myImg").attr("src",imgSrc);
+	       setImg(tempCondition,$("img#myImg"));
+	    }
+	}); 
+	//天气查询功能
+	$('button').click(function(){
+		$("div#serachResult").addClass('hide');
+		var city = $('input#city').val();
+		var cityUrl = "https://free-api.heweather.com/v5/weather?key=29df2248f4de473f92cc1a49dd26efa3&city="+city;
+		$.ajax({
+	       // url:"http://v.juhe.cn/weather/index",
+	       // data:{key:"86285a118143ae1ae2fec9c8c23f951e",cityname:encodeURIComponent(city)},
+	       // url:"http://v.juhe.cn/weather/index?format=2&cityname=%E6%88%90%E9%83%BD&APPID=061f24cf3cde2f60644a8240302983f2",
+	       //url:"http://ipinfo.io/json?",
+	       //url:"http://www.weather.com.cn/data/sk/101270101.html",
+	       // data:{key:"061f24cf3cde2f60644a8240302983f2",cityname:encodeURIComponent(city)},
+	        url:cityUrl,
+	        type:'GET',
+	        dataType:'json',
+	        success:function(data){
+	        	if(data.HeWeather5[0].status == "unknown city"){
+	        		$("span#errorInfo").removeClass('hide');
+	        		return true;
+	        	}
+	        	$("span#errorInfo").addClass('hide');
+	        	var myTemp = data.HeWeather5[0].now.tmp;
+		        var tempText = "温度："+myTemp+String.fromCharCode(176)+'C';
+		        $("#otherTemp").text(tempText);
+		        var otherTempCondition = data.HeWeather5[0].now.cond.txt;
+		        $('#otherCondition').text(otherTempCondition);
+		       // var imgSrc = content + weatherIcons[5];
+		       // $("otherImg").attr("src",imgSrc);
+		       // alert(otherTempCondition);
+		        setImg(otherTempCondition,$("img#otherImg"));
+		        $("div#serachResult").removeClass('hide');
+	        }
+	    }); 
+	});
+
+	$("#city").keypress(function(event) {
+		if(event.keyCode =="13"){
+			$("button").trigger('click');
+		}
+	});
+	
+	function setImg(string,objectImg){
+		if(string.indexOf('晴')>-1){
+			objectImg.attr("src",imgSrc5);
+			return true;
+		}
+		if(string.indexOf('云')>-1){
+			objectImg.attr("src",imgSrc1);
+			return true;
+		}
+		if(string.indexOf('雨')>-1){
+			objectImg.attr("src",imgSrc6);
+			return true;
+		}
+		if(string.indexOf('龙卷')>-1){
+			objectImg.attr("src",imgSrc7);
+			return true;
+		}
+		if(string.indexOf('风')>-1){
+			objectImg.attr("src",imgSrc2);
+			return true;
+		}
+		if(string.indexOf('雾')>-1){
+			objectImg.attr("src",imgSrc4);
+			return true;
+		}
+		if(string.indexOf('雪')>-1){
+			objectImg.attr("src",imgSrc3);
+			return true;
+		}
+		objectImg.attr("src",imgSrc1);
+	}
+	
+});
+</script>
+</head>
+<body>
+	<div id="background">
+		<div id="info">
+			<h1><i>Lmagic's Weather App</i></h1>
+			<h3 id="cityName"></h3>
+			<h5 id="location"></h5>
+			<h5 id="ip"></h5>
+			<h5 id="temp"></h5>
+			<img src="#" id="myImg"></img>
+			<p id='condition'></p>
+		</div>
+		<div id="search">
+			<p class="searchTemp">查询其他城市天气 :</p><input type="text" id="city" placeholder="请输入城市名"/><button><i class="fa fa-search fa-2x" aria-hidden="true"></i></button><span class="hide" id="errorInfo">未知的城市名</span>
+		</div>
+		<div id="serachResult" class="hide">
+			<img src="#" id="otherImg"></img>
+			<div>
+				<span id='otherCondition' class="searchTemp"></span>&nbsp;&nbsp;&nbsp;<span id="otherTemp" class="searchTemp"></span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
