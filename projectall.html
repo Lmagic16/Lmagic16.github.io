@@ -110,7 +110,6 @@ img{
     color: #000;
     box-shadow: 0 0 5px rgba(0,0,0,0.25);
     margin-top: 100px;
-    border: 1px solid red;
     font-size: 18px;
 }
 .projectline{
@@ -139,7 +138,6 @@ img{
     width: 1100px;
     height: 260px;
     margin-bottom: 30px;
-    border:1px solid green;
     text-align: left;
     position: relative;
 }
@@ -171,7 +169,6 @@ a,span,p{
     display: inline-block;
     width: 830px;
     height: 250px;
-    border:1px solid red;
     position: absolute;
     top:0px;
     left: 270px;
@@ -188,6 +185,9 @@ a,span,p{
 .projectinfo>.titlep{
     font-size: 25px;
     margin:10px;
+}
+.logicp{
+    line-height: 30px;
 }
 </style>
 </head>
@@ -216,7 +216,7 @@ a,span,p{
         </div>
        <p class="fontsizebig fontbazar hshadow">ALL PROJECTS</p>
        <div class="projectinner">
-            <a href="#" title="简易功能的计算器" class="projecta">
+            <a href="projects/caculator.html" title="简易功能的计算器" class="projecta">
             <div class="project">
                 <div class="projectimgdiv">
                    <img src="images/project1.jpg" alt="#" />
@@ -226,12 +226,12 @@ a,span,p{
             <div class="projectinfo">
                 <p class="titlep">计算器</p>
                 <p class="infop">简介：一款包括基本计算功能的计算器</p>
-                <p class="logicp">应用逻辑：利用</p>
+                <p class="logicp">应用逻辑：利用eval()函数将字符串计算为数值。当点击数字和计算符号时，将所点击的数字和符号显示在结果框中，当点击"="时，提取结果框中的字符串，利用eval()函数计算其结果。</p>
             </div>
-            <a href="#" class="showa">show</a>
+            <a href="projects/caculator.html" class="showa">show</a>
         </div>
         <div class="projectinner">
-            <a href="#" title="可倒计时的番茄钟" class="projecta">
+            <a href="projects/PomodoroClock.html" title="可倒计时的番茄钟" class="projecta">
             <div class="project">
                 <div class="projectimgdiv">
                    <img src="images/project2.jpg" alt="#" />
@@ -240,13 +240,13 @@ a,span,p{
             </a>
             <div class="projectinfo">
                 <p class="titlep">番茄钟</p>
-                <p class="infop">简介：一款包括两种倒计时的番茄钟</p>
-                <p class="logicp">应用逻辑：利用</p>
+                <p class="infop">简介：番茄钟，是指把任务分解成半小时左右，集中精力工作25分钟后休息5分钟，如此视作种一个“番茄”。本款番茄钟包括工作和休息两种倒计时，倒计时的时间可以自由指定。</p>
+                <p class="logicp">应用逻辑：利用setTimeout()函数作为倒计时。当点击番茄钟时，倒计时开始，并在倒计时函数内设置背景的高度，相当于进度条。当再次点击番茄钟时，clearTimeout()函数暂停倒计时函数。通过设置flag来确定番茄钟倒计时的阶段和背景图。</p>
             </div>
-            <a href="#" class="showa">show</a>
+            <a href="projects/PomodoroClock.html" class="showa">show</a>
         </div>
         <div class="projectinner">
-            <a href="#" title="可查询全球各地的天气预报" class="projecta">
+            <a href="projects/weather.html" title="可查询全球各地的天气预报" class="projecta">
             <div class="project">
                 <div class="projectimgdiv">
                    <img src="images/project3.jpg" alt="#" />
@@ -254,14 +254,14 @@ a,span,p{
             </div>
             </a>
             <div class="projectinfo">
-                <p class="titlep">番茄钟</p>
-                <p class="infop">简介：一款包括两种倒计时的番茄钟</p>
-                <p class="logicp">应用逻辑：利用</p>
+                <p class="titlep">天气预报</p>
+                <p class="infop">简介：可显示当前所在地的ip地址与天气状况，同时支持中英文查询全球各地城市的天气状况。</p>
+                <p class="logicp">应用逻辑：利用api："http://ipinfo.io/json?"获取本地公网ip。利用和风天气的api接口获取本地天气信息，当点击搜索框时将搜索框的文本内容作为url参数发送给和风天气的后台api接口，将返回的json数据处理并插入到页面中。请求采用ajax，和风天气是我目前找到的一款不收费不认证的api接口供应商。</p>
             </div>
-            <a href="#" class="showa">show</a>
+            <a href="projects/weather.html" class="showa">show</a>
         </div>
         <div class="projectinner">
-            <a href="#" title="可随机播放的名言警句" class="projecta">
+            <a href="projects/RandomQuoteMachine.html" title="名言警句轮播" class="projecta">
             <div class="project">
                 <div class="projectimgdiv">
                    <img src="images/project4.jpg" alt="#" />
@@ -269,29 +269,29 @@ a,span,p{
             </div>
             </a>
             <div class="projectinfo">
-                <p class="titlep">番茄钟</p>
-                <p class="infop">简介：一款包括两种倒计时的番茄钟</p>
-                <p class="logicp">应用逻辑：利用</p>
+                <p class="titlep">名言警句轮播</p>
+                <p class="infop">简介：可随机播放数据库中的名言警句，并可分享到twitter和微博，同时背景颜色也是随机改变。</p>
+                <p class="logicp">应用逻辑：利用野狗云提供的BaaS(后端即服务)，名言警句存储在野狗后端，通过野狗提供的api随机提取出名言警句插入到页面中，并同时改变页面背景样式。</p>
             </div>
-            <a href="#" class="showa">show</a>
+            <a href="projects/RandomQuoteMachine.html" class="showa">show</a>
         </div>
         <div class="projectinner">
-            <a href="#" title="简易功能的聊天室" class="projecta">
+            <a href="projects/wikiapp.html" title="wiki条目检索" class="projecta">
             <div class="project">
                 <div class="projectimgdiv">
-                   <img src="images/project9.jpg" alt="#" />
+                   <img src="images/project10.jpg" alt="#" />
                 </div>  
             </div>
             </a>
             <div class="projectinfo">
-                <p class="titlep">番茄钟</p>
-                <p class="infop">简介：一款包括两种倒计时的番茄钟</p>
-                <p class="logicp">应用逻辑：利用</p>
+                <p class="titlep">wiki条目检索</p>
+                <p class="infop">简介：可搜索维基百科的条目，当输入为空时，打开一个随机的维基百科条目。</p>
+                <p class="logicp">应用逻辑：wiki提供的api接口，获得检索的title，简介以及pageid，并通过api：'http://en.wikipedia.org/?curid=' 获取wiki页面链接。并将结果插入到页面中。api："http://en.wikipedia.org/wiki/Special:Random"可获取随机的wiki页面。wiki的api相关信息："http://www.mediawiki.org/wiki/API:Main_page"</p>
             </div>
-            <a href="#" class="showa">show</a>
+            <a href="projects/wikiapp.html" class="showa">show</a>
         </div>
         <div class="projectinner">
-            <a href="#" title="简易功能的弹幕室" class="projecta">
+            <a href="projects/danmu.html" title="简易功能的弹幕室" class="projecta">
             <div class="project">
                 <div class="projectimgdiv">
                    <img src="images/project8.jpg" alt="#" />
@@ -299,14 +299,14 @@ a,span,p{
             </div>
             </a>
             <div class="projectinfo">
-                <p class="titlep">番茄钟</p>
-                <p class="infop">简介：一款包括两种倒计时的番茄钟</p>
-                <p class="logicp">应用逻辑：利用</p>
+                <p class="titlep">弹幕室</p>
+                <p class="infop">简介：可多人共享弹幕信息，同时具有弹幕清除功能。</p>
+                <p class="logicp">应用逻辑：利用野狗云提供的BaaS(后端即服务)，后端维护所有的弹幕信息，当页面有新的弹幕信息要提交时，将弹幕信息提交到后端，同时监听后台数据变化，将变化的数据随机位置随机颜色插入屏幕(保证了弹幕信息共享)。当页面清屏时，只是将当前页面的弹幕信息清除，后端数据不做改变。所有与后端的交互均通过野狗云提供的api实现。</p>
             </div>
-            <a href="#" class="showa">show</a>
+            <a href="projects/danmu.html" class="showa">show</a>
         </div>
         <div class="projectinner">
-            <a href="#" title="个人首页demo" class="projecta">
+            <a href="http://codepen.io/Lmagic16_/full/BQEdWY/" title="个人首页demo" class="projecta">
             <div class="project">
                 <div class="projectimgdiv">
                    <img src="images/demo2.jpg" alt="#" />
@@ -314,14 +314,14 @@ a,span,p{
             </div>
             </a>
             <div class="projectinfo">
-                <p class="titlep">番茄钟</p>
-                <p class="infop">简介：一款包括两种倒计时的番茄钟</p>
-                <p class="logicp">应用逻辑：利用</p>
+                <p class="titlep">我的第一款个人首页</p>
+                <p class="infop">简介：多图预警</p>
+                <p class="logicp">应用逻辑：个人练习</p>
             </div>
-            <a href="#" class="showa">show</a>
+            <a href="http://codepen.io/Lmagic16_/full/BQEdWY/" class="showa">show</a>
         </div>
         <div class="projectinner">
-            <a href="#" title="我的第一个web网页" class="projecta">
+            <a href="http://codepen.io/Lmagic16_/full/PbVERX/" title="我的第一个web页面" class="projecta">
             <div class="project">
                 <div class="projectimgdiv">
                    <img src="images/demo1.jpg" alt="#" />
@@ -329,11 +329,11 @@ a,span,p{
             </div>
             </a>
             <div class="projectinfo">
-                <p class="titlep">番茄钟</p>
-                <p class="infop">简介：一款包括两种倒计时的番茄钟</p>
-                <p class="logicp">应用逻辑：利用</p>
+                <p class="titlep">我的第一个web页面</p>
+                <p class="infop">简介：包括python创始人Guido van Rossum的个人简介</p>
+                <p class="logicp">应用逻辑：个人练习</p>
             </div>
-            <a href="#" class="showa">show</a>
+            <a href="http://codepen.io/Lmagic16_/full/PbVERX/" class="showa">show</a>
         </div>
        </div>
     </div>
