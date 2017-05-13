@@ -4,10 +4,6 @@
 <head>
 <title>Random Quote Machine</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script src="scripts/jquery.js" type="text/javascript"></script>
-<script src = "https://cdn.wilddog.com/js/client/current/wilddog.js" ></script>
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js" type="text/javascript"></script>
-<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 <style type="text/css">
 body{
@@ -87,6 +83,22 @@ button{
 	border: 1px solid #888;
 }
 </style>
+</head>
+<body>
+	<div id="quotebox">
+		<div id="insertbox">
+			<p id="quote" class="insert">请点击下一句</p>
+			<p id="author" class="insert">-有惊喜哦</p>
+		</div>
+		<a id="link1" target="_blank" title="分享到twitter"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a>
+		<a id="link2" target="_blank" title="分享到微博"><i class="fa fa-weibo fa-lg" aria-hidden="true"></i></a>
+		<button id="changequote">下一句</button>
+	</div>
+	<p>by  Lmagic_</p>
+<script src="../scripts/jquery.js" type="text/javascript"></script>
+<script src = "https://cdn.wilddog.com/js/client/current/wilddog.js" ></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js" type="text/javascript"></script>
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	//与野狗后台云建立连接
@@ -115,33 +127,6 @@ $(document).ready(function(){
      
 	});
 
-	//鼠标交互效果
-	/*
-	var x=10;
-	var y=10;
-	$("#link1").mouseover(function(e) {
-		var $inform = $('<p class="mousetext">分享到twitter</p>');
-		$("body").append($inform);
-		$inform.css({
-			"top":(e.pageY+y)+"px",
-			"left":(e.pageX+x)+"px"
-		}).show("fast");
-	}).mouseout(function(e) {
-		$(".mousetext").remove();
-	});
-	*/
-/*
-	$("#link2").mouseover(function(e) {
-		var $inform = $('<p class="mousetext">分享到微博</p>');
-		$("body").append($inform);
-		$inform.css({
-			"top":(e.pageY+y)+"px",
-			"left":(e.pageX+x)+"px"
-		}).show("fast");
-	}).mouseout(function(e) {
-		$(".mousetext").remove();
-	});
-*/
 	//获取随机颜色
 	function getRandomColor(){
 		var randomcolor = 'rgb('+Math.floor(255*Math.random())+','+Math.floor(255*Math.random())+','+Math.floor(255*Math.random())+')';
@@ -169,18 +154,6 @@ $(document).ready(function(){
 
 });
 </script>
-</head>
-<body>
-	<div id="quotebox">
-		<div id="insertbox">
-			<p id="quote" class="insert">请点击下一句</p>
-			<p id="author" class="insert">-有惊喜哦</p>
-		</div>
-		<a id="link1" target="_blank" title="分享到twitter"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a>
-		<a id="link2" target="_blank" title="分享到微博"><i class="fa fa-weibo fa-lg" aria-hidden="true"></i></a>
-		<button id="changequote">下一句</button>
-	</div>
-	<p>by  Lmagic_</p>
 </body>
 </html>
 

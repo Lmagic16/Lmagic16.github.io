@@ -3,8 +3,6 @@
 <head>
 <title>Magic Pomodoro Clock</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script src="scripts/jquery.js" type="text/javascript"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.0.0.js" type="text/javascript"></script>
 <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" media="screen" />
 <style type="text/css">
 body{
@@ -71,6 +69,28 @@ span{
 }
 
 </style>
+</head>
+<body>
+	<div id="background">
+		<h1><i>Magic Pomodoro Clock</i></h1>
+		<div id="left" class="set">
+			<p class="info">BREAK LENGTH</p>
+			<p><span id="breakDecrease" class="change">-</span><span id="breakNum">5</span><span id="breakAdd" class="change">+</span></p>
+		</div>
+		<div id="right" class="set">
+			<p class="info">SESSION LENGTH</p>
+			<p><span id="sessionDecrease" class="change">-</span><span id="sessionNum">25</span><span id="sessionAdd" class="change">+</span></p>
+		</div>
+		<div id="timer">
+			<p id="when">SESSION</p>
+			<p id="timerNum">25</p>
+			<img id="backimg" src="images/color.jpg" alt="#" />
+			<img id="backimgbreak" src="images/color1.jpg" alt="#" />
+		</div>
+		
+	</div>
+<script src="../scripts/jquery.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.0.0.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	var $timerNum = $("#timerNum");
@@ -183,53 +203,8 @@ $(document).ready(function(){
 			number = !number;
 		}
 	});
-	/*
-	$("#timer").toggle(
- 	function(){
-		//var top = $("#backimg").css("top");
-		//var top2 = $("#backimgbreak").css("top");
-		countdown();
-		if(flag1 === true){
-			$("#backimg").animate({"top": "0px"}, timeLeft);
-		}
-		if(flag2 === true){
-			$("#backimgbreak").animate({"top": "0px"}, timeLeft);
-		}
-		
-	},
-	function(){	
-		countdownstop();
-		if(flag1 === true){
-			$("#backimg").stop();
-		}
-		if(flag2 === true){
-			$("#backimgbreak").stop();
-		}
-	}
-	);
-	*/
 });
 </script>
-</head>
-<body>
-	<div id="background">
-		<h1><i>Magic Pomodoro Clock</i></h1>
-		<div id="left" class="set">
-			<p class="info">BREAK LENGTH</p>
-			<p><span id="breakDecrease" class="change">-</span><span id="breakNum">5</span><span id="breakAdd" class="change">+</span></p>
-		</div>
-		<div id="right" class="set">
-			<p class="info">SESSION LENGTH</p>
-			<p><span id="sessionDecrease" class="change">-</span><span id="sessionNum">25</span><span id="sessionAdd" class="change">+</span></p>
-		</div>
-		<div id="timer">
-			<p id="when">SESSION</p>
-			<p id="timerNum">25</p>
-			<img id="backimg" src="images/color.jpg" alt="#" />
-			<img id="backimgbreak" src="images/color1.jpg" alt="#" />
-		</div>
-		
-	</div>
 </body>
 </html>
 

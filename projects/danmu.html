@@ -3,8 +3,6 @@
 <head>
 <title>我们的弹幕聊天室</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script src="scripts/jquery.js" type="text/javascript"></script>
-<script src = "https://cdn.wilddog.com/js/client/current/wilddog.js" ></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.css" media="screen" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" media="screen" />
 <style type="text/css">
@@ -71,6 +69,19 @@ input#clear:hover{
 }
 
 </style>
+</head>
+<body>
+	<div id="background">
+		<div id="screen"></div>
+		<form id="danmuform">
+			<input type="text" placeholder="说点什么？" id="input_text" />
+			<input type="button" class="inputbutton" value="发送" id="send"/>
+			<input type="button" class="inputbutton" value="清屏" id="clear"/>
+		</form>
+	</div>
+
+<script src="../scripts/jquery.js" type="text/javascript"></script>
+<script src = "https://cdn.wilddog.com/js/client/current/wilddog.js" ></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	var ref = new Wilddog("https://lmagic.wilddogio.com/");
@@ -118,17 +129,6 @@ $(document).ready(function(){
 	}
 });
 </script>
-</head>
-<body>
-	<div id="background">
-		<div id="screen"></div>
-		<form id="danmuform">
-			<input type="text" placeholder="说点什么？" id="input_text" />
-			<input type="button" class="inputbutton" value="发送" id="send"/>
-			<input type="button" class="inputbutton" value="清屏" id="clear"/>
-		</form>
-	</div>
-</body>
 </body>
 </html>
 
