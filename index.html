@@ -549,33 +549,6 @@ $(document).ready(function(){
             }
         }
     });
-    //项目小图鼠标划过效果
-    //鼠标滑过的位置有高度差，不知道是什么原因，所以设置了tooldiv的margin-top
-    /*
-    $(".projectinner>a").mouseover(function(e){
-        this.mytitle = this.title;
-        var $p_title = $("<p></p>");
-        var $img = $(this).find('img');
-        var imgsrc = $img.attr("src");
-        this.title ="";
-        var $div = $("<div id='tooldiv'><img src='"+imgsrc+"'></div>");
-        $("body").append($div);
-        $p_title.text(this.mytitle);
-        $div.append($p_title);
-        $("#tooldiv").css({
-            "top":e.pageY+"px",
-            "left":e.pageX+"px"
-        }).show("fast");
-    }).mouseout(function() {
-        $("#tooldiv").remove();
-        $(this).attr("title",this.mytitle);
-    }).mousemove(function(e) {
-        $("#tooldiv").css({
-            "top":e.pageY+"px",
-            "left":e.pageX+"px"
-        });
-    });
-    */
 
 });
 </script>
