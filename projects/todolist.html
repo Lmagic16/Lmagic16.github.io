@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My TodoList</title>
+    <link rel="shortcut icon" href="images/icons/site.ico" type="image/x-icon"/> 
+    <style type="text/css">
+    body{
+      background-color:#F0F0F0;
+      width: 100%;
+      height: 100%;
+      font:170%  "Roboto",Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+    .active{
+      color:red;
+    }
+    #backgdiv{
+      width:500px;
+      margin:0 auto;
+      margin-top: 200px;
+    }
+    h2{
+      color: #009966;
+      opacity: 0.5;
+    }
+    #todoinput{
+      width: 500px;
+      height: 50px;
+      font-size: 25px;
+      border-radius: 15px;
+      border:1px solid #F0F0F0;
+      text-align: center;
+    }
+    input:focus{
+      outline: none;
+    }
+    .tododiv{
+      width: 480px;
+      height: 50px;
+      line-height: 50px;
+      background-color: #fff;
+      border:1px solid #f0f0f0;
+      box-shadow: 0px 2px 2px 0px #888;
+      text-align: left;
+      padding-left: 20px;
+    }
+    li{
+      display: inline-block;
+      list-style: none;
+      width:400px;
+      color:#383838;
+    }
+    .tododiv>a{
+      display: inline-block;
+      width: 50px;
+      cursor: pointer;
+    }
+    .tododiv>a:hover{
+      color:red;
+    }
+    .tododiv>input{
+      width: 20px;
+      height: 20px;
+      border-radius: 20px;
+      color: #009966;
+    }
+    .todolast{
+      font-size: 20px;
+      color:#888;
+      line-height: 50px;
+    }
+    .todolasta{
+      display: inline-block;
+      width: 300px;
+      margin-left: 60px;
+    }
+    .todolasta>a{
+      display: inline-block;
+      margin-left: 10px;
+      height: 25px;
+      line-height: 25px;
+      padding: 3px;
+      text-align: center;
+      cursor: pointer;
+      border:1px solid #fff;
+    }
+    .todolasta>a:hover{
+      border:1px solid rgba(0,153,102,0.5);
+    }
+    .selected{
+      text-decoration:line-through;
+      color:#888;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="backgdiv">
+      <h2><i>My TodoList</i></h2>
+      <input type="text" placeholder="add a todo" id="todoinput" v-on:keyup.enter="addatodo" v-model = "message"/>
+      <div v-for="item in showtodos(todos)">
+        <div class='tododiv'><input type='checkbox' v-on:click="inputclick" v-bind:value="item.text"><li v-bind:class="{selected:item.isdone}">{{item.text}}</li><a v-on:click='deleteatodo' herf="#">&times;</a></div>
+      </div>
+      <div class='tododiv todolast' v-if="show">
+        <span>{{lefttodo}} items left</span>
+        <div class="todolasta">
+          <a v-on:click="showalltodo">all</a><a v-on:click="showactivetodo">active</a><a v-on:click="showcompletedtodo">completed</a>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script>
+    var app1 = new Vue({
+      el:"#backgdiv",
+      data:{
+        message:'',
+        todos:[
+          {
+            text:"do1",
+            isdone:false
+          },
+          {
+            text:"do2",
+            isdone:false
+          },
+          {
+            text:"do3",
+            isdone:false
+          }
+        ],
+        choose:"showall"
+      },
+      computed:{
+        show:function(){
+          return this.todos.length === 0 ? false : true
+        },
+        lefttodo:function(){
+          var number = 0;
+          for(var i=0;i<this.todos.length;i++){
+              if(this.todos[i].isdone === false){
+                  number +=1
+              }
+          }
+          return number
+        }
+      },
+      methods:{
+        deleteatodo:function(e){
+          var which = e.target.parentNode.children[1].innerHTML
+          for(var i=0;i<this.todos.length;i++){
+              if(which === this.todos[i].text){
+                  this.todos.splice(i,1)
+              }
+          }
+        },
+        addatodo:function(){
+          this.todos.push({text:this.message,isdone:false})
+        },
+        inputclick:function(){
+          var index = 0;
+          for(var i=0;i<this.todos.length;i++){
+              if(event.target.value === this.todos[i].text){
+                  index = i;
+              }
+          }
+          if(event.target.checked){
+            this.todos[index].isdone = true
+          }else{
+            this.todos[index].isdone = false
+          }
+        },
+        showtodos:function(todos){
+            var showarr = new Array();
+            if(this.choose === "showall"){
+              return this.todos
+            }else if(this.choose === "showactive"){
+              for(var i=0;i<this.todos.length;i++){
+                  if(this.todos[i].isdone === false){
+                      showarr.push(this.todos[i])
+                  }
+              }
+              return showarr
+            }else if(this.choose === "showacompleted"){
+              for(var i=0;i<this.todos.length;i++){
+                  if(this.todos[i].isdone === true){
+                      showarr.push(this.todos[i])
+                  }
+              }
+              return showarr
+            }
+        },
+        showactivetodo:function(){
+          this.choose = "showactive"
+        },
+        showalltodo:function(){
+          this.choose = "showall"
+        },
+        showcompletedtodo:function(){
+          this.choose = "showacompleted"
+        }
+      }
+    })
+    </script>
+  </body>
+</html>
