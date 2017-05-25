@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form Search</title>
+    <link rel="shortcut icon" href="../images/icons/site.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" />
+    <style type="text/css">
+    body{
+      background-color:#F0F0F0;
+      width: 100%;
+      height: 100%;
+      font:150% Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+    #bodyback {
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 100px;
+    }
+    .serachinput {
+      outline: none;
+      width: 300px;
+      height: 35px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: normal;
+      font-size: 18px;
+      border: 1px solid #F0F0F0;
+    }
+    #searchicon {
+      color: rgba(0,153,102,0.5);
+    }
+    table{
+      width: 350px;
+      margin: 0 auto;
+      border: 2px solid rgba(0,153,102,0.5);
+      background-color: #fff;
+    }
+    th {
+      height: 40px;
+      font-size: 15px;
+      color:  #505050;
+      background-color: #f5f5f5;
+      font-weight: normal;
+    }
+    thead th {
+      background-color: rgba(0,153,102,0.5);
+      color:  #F0F0F0;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .arrow {
+      display: inline-block;
+      vertical-align: middle;
+      width: 0;
+      height: 0;
+      margin-left: 5px;
+    }
+    .active{
+      color: #fff;
+    }
+    .asc{
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 6px solid  #F0F0F0;
+    }
+    .dsc{
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid   #F0F0F0;
+    }
+    #add{
+        width: 350px;
+        margin-top: 50px;
+        margin: 0 auto;
+    }
+    #add a {
+      display: inline-block;
+      width: 80px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      color: #fff;
+      background-color: rgba(0,153,102,0.5);
+    }
+    #add input {
+      outline: none;
+      width: 120px;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="bodyback">
+        <input type="text" placeholder="search form" v-model="message" class="serachinput"/><i class="fa fa-search fa-lg fa-fw" id="searchicon"></i>
+        <table>
+          <thead>
+            <tr>
+              <th v-for="k in keys" v-on:click="changeOrder(k)" v-bind:class="{active:orderkey == k}">
+              {{k}}
+              <span class="arrow" v-bind:class="orderflag[k] > 0 ? 'asc' : 'dsc'"></span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="one in filteredData">
+              <th>
+                {{one.name}}
+              </th>
+              <th>
+                {{one.power}}
+              </th>
+            </tr>
+          </tbody>
+        </table>
+        <div id="add">
+          <a>Add a data</a>
+          <input type="text" placeholder="name" v-model="addName" v-on:keyup.enter="addData"/>
+          <input type="number" placeholder="power" v-model="addPower" v-on:keyup.enter="addData"/>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script>
+    var app = new Vue({
+      el:"#app",
+      data:{
+        message:'',
+        keys:['name', 'power'],
+        gridData: [
+          { name: 'Chuck Norris', power: Infinity },
+          { name: 'Bruce Lee', power: 9000 },
+          { name: 'Jackie Chan', power: 7000 },
+          { name: 'Jet Li', power: 8000 }
+        ],
+        orderflag:{
+          "name":1,
+          "power":1
+        },
+        orderkey:'',
+        addName:'',
+        addPower:''
+      },
+      computed: {
+        filteredData:function(){
+          var filterKey = this.message
+          var allData = this.gridData
+          var orderkey = this.orderkey
+          var res = allData
+          //搜索框过滤
+          if(filterKey){
+            var tmepArr = new Array()
+            for(i=0;i<allData.length;i++){
+              if(String(allData[i].name).toLowerCase().indexOf(filterKey) > -1 ){
+                tmepArr.push(allData[i])
+              }
+            }
+            res = tmepArr
+          }
+          //排序过滤
+          if(orderkey){
+            aOrd = this.orderflag[orderkey]
+            res.sort(function(a,b){
+                var a = a[orderkey]
+                var b = b[orderkey]
+                if(a>b){
+                  return 1 * aOrd
+                }else if(a<b){
+                  return (-1) * aOrd
+                }else{
+                  return 0
+                }
+            })
+          }
+          return res
+        }
+      },
+      methods:{
+          changeOrder:function(k){
+              this.orderflag[k] = this.orderflag[k] * (-1)
+              this.orderkey = k
+          },
+          addData:function(){
+            if(this.addName && this.addPower){
+              this.gridData.push({name:this.addName,power:this.addPower})
+            }
+          }
+      }
+    })
+    </script>
+  </body>
+</html>

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My TodoList</title>
-    <link rel="shortcut icon" href="images/icons/site.ico" type="image/x-icon"/> 
+    <link rel="shortcut icon" href="../images/icons/site.ico" type="image/x-icon"/>
     <style type="text/css">
     body{
       background-color:#F0F0F0;
@@ -101,7 +101,7 @@
       <h2><i>My TodoList</i></h2>
       <input type="text" placeholder="add a todo" id="todoinput" v-on:keyup.enter="addatodo" v-model = "message"/>
       <div v-for="item in showtodos(todos)">
-        <div class='tododiv'><input type='checkbox' v-on:click="inputclick" v-bind:value="item.text"><li v-bind:class="{selected:item.isdone}">{{item.text}}</li><a v-on:click='deleteatodo' herf="#">&times;</a></div>
+        <div class='tododiv'><input type='checkbox' v-on:click="inputclick(item)" v-bind:value="item.text"><li v-bind:class="{selected:item.isdone}">{{item.text}}</li><a v-on:click='deleteatodo(item)' herf="#">&times;</a></div>
       </div>
       <div class='tododiv todolast' v-if="show">
         <span>{{lefttodo}} items left</span>
@@ -147,29 +147,15 @@
         }
       },
       methods:{
-        deleteatodo:function(e){
-          var which = e.target.parentNode.children[1].innerHTML
-          for(var i=0;i<this.todos.length;i++){
-              if(which === this.todos[i].text){
-                  this.todos.splice(i,1)
-              }
-          }
+        deleteatodo:function(item){
+          this.todos.splice(this.todos.indexOf(item),1)
         },
         addatodo:function(){
           this.todos.push({text:this.message,isdone:false})
+          this.message = ''
         },
-        inputclick:function(){
-          var index = 0;
-          for(var i=0;i<this.todos.length;i++){
-              if(event.target.value === this.todos[i].text){
-                  index = i;
-              }
-          }
-          if(event.target.checked){
-            this.todos[index].isdone = true
-          }else{
-            this.todos[index].isdone = false
-          }
+        inputclick:function(item){
+          item.isdone = !item.isdone
         },
         showtodos:function(todos){
             var showarr = new Array();
