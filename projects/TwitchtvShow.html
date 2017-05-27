@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Twitchtv Show</title>
+    <link rel="shortcut icon" href="../images/icons/site.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" />
+    <style type="text/css">
+    body{
+      background-color:#f79f94;
+      width: 100%;
+      height: 100%;
+      font: Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+    main {
+        width: 375px;
+        margin: 0 auto;
+        margin-top: 50px;
+        background-color: #F5F5F5;
+        position: relative;
+    }
+    header {
+      width: 100%;
+      background-color: #F47564;
+    }
+    .head {
+      width: 31%;
+      display: inline-block;
+      height: 60px;
+      line-height: 60px;
+      color: #fff;
+      cursor: pointer;
+    }
+    .prompt {
+      display: inline-block;
+      position: absolute;
+      top: 60px;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid #F47564;
+    }
+    .promptall{
+      left:14%;
+    }
+    .promptonline{
+      left:46%;
+    }
+    .promptoffline{
+      left:80%;
+    }
+    #all {
+      border-right: 1px solid #E8E8E8;
+    }
+    #online {
+      border-right: 1px solid #E8E8E8;
+    }
+    .search {
+      position: relative;
+      padding:20px 0px;
+      border-bottom: 1px solid #C8C8C8;
+    }
+    .searchinput {
+      width: 250px;
+      height: 30px;
+      border-radius: 15px;
+      padding: 0px 35px;
+      border:1px solid #F0F0F0;
+      outline: none;
+    }
+    #searchIcon {
+      position: absolute;
+      left: 35px;
+      top:25px;
+      color: #C8C8C8;
+      font-size: 22px;
+    }
+    .oneChannel{
+      height: 80px;
+      line-height: 80px;
+      position: relative;
+      text-align: left;
+    }
+    .logo {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      padding: 10px 20px;
+    }
+    .logo img{
+      width: 100%;
+      height: 100%;
+      border: 3px solid #f79f94;
+      border-radius: 50%;
+    }
+    .name {
+      position: absolute;
+      display: inline-block;
+      top:0px;
+      left:120px;
+      color:#f79f94;
+    }
+    .status {
+      position: absolute;
+      right: 20px;
+      top: 35px;
+    }
+    .fa-check {
+      color:#009966;
+    }
+    .fa-exclamation {
+      color:#CC3333;
+    }
+    .user{
+      display: inline-block;
+      position: absolute;
+      top:20px;
+      left:120px;
+      height: 50px;
+      font-size: 10px;
+      color:#383838;
+      text-decoration: none;
+    }
+    @media screen and (max-width: 400px) {
+      body{
+        padding: 0px;
+        margin: 0px;
+      }
+      main {
+        width: 100%;
+        margin-top: 0px;
+      }
+    }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <main>
+        <header>
+          <div class="head" id="all" v-on:click="clickAll">All</div>
+          <div class="head" id="online" v-on:click="clickOnline">Online</div>
+          <div class="head" id="offline" v-on:click="clickOffline">Offline</div>
+          <span class="prompt" v-bind:class="{promptall:showChannels.all,promptonline:showChannels.online,promptoffline:showChannels.offline}"></span>
+        </header>
+        <div class="search">
+          <i class="fa fa-search" id="searchIcon"></i>
+          <input type="text" class="searchinput" v-model="message"/>
+        </div>
+        <div class="content">
+          <div class="oneChannel" v-for="onechannel in filteredChannels">
+            <a v-bind:href="onechannel.channel.url" v-bind:title="onechannel.channel.url" target="_blank">
+              <div class="logo">
+                <img v-bind:src="onechannel.channel.logo"/>
+              </div>
+              <div class="name"><strong>{{onechannel.channel.name}}</strong></div>
+              <div class="user" v-if="onechannel.stream_type === 'live'"><i class="fa fa-user-o"></i>&nbsp;{{onechannel.viewers}}</div>
+              <div class="status">
+                <i class="fa fa-check" v-if="onechannel.stream_type === 'live'"></i>
+                <i class="fa fa-exclamation" v-else></i>
+              </div>
+            </a>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="../scripts/jquery.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script>
+    var app = new Vue({
+      el:"#app",
+      data:{
+        message:'',
+        onlineChannel:[],
+        offlineChannel:[],
+        allChannel:[],
+        showChannels:{
+          "all":true,
+          "online":false,
+          "offline":false
+        }
+      },
+      computed:{
+        filteredChannels:function(){
+          var all = this.allChannel
+          var online = this.onlineChannel
+          var offline = this.offlineChannel
+          var res = this.allChannel
+          /*header 点击判断*/
+          if(this.showChannels.all){
+              console.log("all")
+              res = all
+          }else if(this.showChannels.online){
+              console.log("online")
+              res = online
+          }else if(this.showChannels.offline){
+              console.log("offline")
+              res = offline
+          }
+          /*搜索框过滤*/
+          if(this.message){
+              var tmepArr = new Array()
+              for(i=0;i<res.length;i++){
+                if(String(res[i].channel.name).toLowerCase().indexOf(this.message) > -1 ){
+                  tmepArr.push(res[i])
+                }
+              }
+              res = tmepArr
+          }
+          return res
+        }
+      },
+      methods:{
+        clickAll:function(){
+          this.showChannels.all = true
+          this.showChannels.online = false
+          this.showChannels.offline = false
+        },
+        clickOnline:function(){
+          this.showChannels.all = false
+          this.showChannels.online = true
+          this.showChannels.offline = false
+        },
+        clickOffline:function(){
+          this.showChannels.all = false
+          this.showChannels.online = false
+          this.showChannels.offline = true
+        }
+      },
+      mounted:function(){
+        var that = this
+        //获取全部流数据
+        $.ajax({
+          url: 'https://api.twitch.tv/kraken/streams?stream_type=all&limit=25',
+          type: "GET",
+          dataType: "json",
+          headers: {
+            'Client-Id': '8clu87em16keueeq5qdkbny5s4k6kn'
+          },
+          success:function(data){
+            that.allChannel = data.streams
+          }
+        })
+        //获取非直播流数据
+        $.ajax({
+          url: 'https://api.twitch.tv/kraken/streams?stream_type=playlist&limit=25',
+          type: "GET",
+          dataType: "json",
+          headers: {
+            'Client-Id': '8clu87em16keueeq5qdkbny5s4k6kn'
+          },
+          success:function(data){
+            that.offlineChannel = data.streams
+          }
+        })
+        //获取直播流数据
+        $.ajax({
+          url: 'https://api.twitch.tv/kraken/streams?stream_type=live&offset=25&limit=25',
+          type: "GET",
+          dataType: "json",
+          headers: {
+            'Client-Id': '8clu87em16keueeq5qdkbny5s4k6kn'
+          },
+          success:function(data){
+            that.onlineChannel = data.streams
+          }
+        })
+      }
+    })
+    </script>
+  </body>
+</html>
