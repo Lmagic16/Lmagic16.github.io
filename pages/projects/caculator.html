@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>Caculator</title>
+<link rel="shortcut icon" href="../../images/icons/site.ico" type="image/x-icon"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" />
+<style type="text/css">
+body{
+	margin:0;
+	padding:0;
+	background-color:#2A3D47;
+	font:180%  "Roboto",Arial, Helvetica, sans-serif;
+	color:#598763;
+}
+*{
+	margin:0;
+	padding:0;
+	color:#2A3D47;
+}
+#background{
+	width:370px;
+	height: 420px;
+	margin:0 auto;
+	background-color:#496B7D;
+	margin-top: 200px;
+}
+#caculator{
+	width:350px;
+	height: 350px;
+	margin:0 auto;
+	background-color:#496B7D;
+	text-align: center;
+}
+#result{
+	display: inline-block;
+	width: 300px;
+	height: 35px;
+}
+.button{
+	display: inline-block;
+	width: 70px;
+	height: 60px;
+	margin-top: 5px;
+	cursor: pointer;
+	font:50%  "Roboto",Arial, Helvetica, sans-serif;
+}
+h6{
+	padding-top: 5px;
+	margin: 5px;
+}
+input{
+	border: 1px solid #E8E8E8;
+	background-color: #E8E8E8;
+	color: #2A3D47;
+	text-align: right;
+}
+input:hover{
+	border: 1px solid #E8E8E8;
+}
+button:hover{
+	border:1px solid #2A3D47;
+	background-color: #E8E8E8;
+}
+button:focus{
+	border:1px solid #2A3D47;
+	background-color: #E8E8E8;
+}
+
+</style>
+</head>
+<body>
+<div id="background">
+   <div id="caculator">
+	<h6><i>Magic Caculator</i></h6>
+	<input type="text" id="result" readonly>
+	<button class="button" value="AC">AC</button>
+    <button class="button" value="CE">CE</button>
+    <button class="button" value="%">%</button>
+    <button class="button" value="/">/</button>
+    <button class="button" value="7">7</button>
+    <button class="button" value="8">8</button>
+    <button class="button" value="9">9</button>
+    <button class="button" value="*">*</button>
+    <button class="button" value="4">4</button>
+    <button class="button" value="5">5</button>
+    <button class="button" value="6">6</button>
+    <button class="button" value="-">-</button>
+    <button class="button" value="1">1</button>
+    <button class="button" value="2">2</button>
+    <button class="button" value="3">3</button>
+    <button class="button" value="+">+</button>
+    <button class="button" value=".">.</button>
+    <button class="button" value="0">0</button>
+    <button class="button" value="And">Ans</button>
+    <button class="button" value="=">=</button>
+  </div>
+</div>
+<script src="../../static/scripts/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var caculText = "";
+	var $res = $("#result");
+	$("button").click(function() {
+		var text = $(this).attr("value");
+		if(parseInt(text, 10) == text || text === "." || text === "/" || text === "*" || text === "-" || text === "+" || text === "%"){
+			caculText +=text;
+			$res.val(caculText);
+		}else if(text === "AC"){
+			caculText = "";
+			$res.val(caculText);
+		}else if(text === "CE"){
+			caculText = caculText.slice(0,-1);
+			$res.val(caculText);
+		}else if(text === "="){
+			caculText = eval(caculText);
+			$res.val(caculText);
+		}
+	});
+
+});
+</script>
+</body>
+</html>
+

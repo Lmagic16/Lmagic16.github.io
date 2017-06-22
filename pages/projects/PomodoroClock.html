@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>Magic Pomodoro Clock</title>
+<link rel="shortcut icon" href="../../images/icons/site.ico" type="image/x-icon"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" />
+<style type="text/css">
+body{
+	margin:0;
+	padding:0;
+	background-color:#404040;
+	font:160%  'Pacifico',Arial, Helvetica, sans-serif;
+	color:#fff;
+	width: 100%;
+	height: 100%;
+}
+*{
+	margin:0;
+	padding:0;
+	color:#fff;
+}
+#background{
+	width: 50%;
+	margin:0 auto;
+	margin-top: 100px;
+	text-align: center;
+}
+.set{
+	width:30%;
+	display: inline-block;
+	margin-top: 50px;
+}
+p.info{
+	font-size: 75%;
+}
+span{
+	display: inline-block;
+	margin: 10px;
+	-moz-user-select:none;/*火狐*/
+
+	-webkit-user-select:none;/*webkit浏览器*/
+
+	-ms-user-select:none;/*IE10*/
+
+	user-select:none;
+}
+.change{
+	cursor: pointer;
+}
+#timer{
+	width: 400px;
+	height: 400px;
+	margin:0 auto;
+	border:2px solid #50ED57;
+	border-radius:200px;
+	font-size: 200%;
+	cursor: pointer;
+	position: relative;
+	overflow:hidden;
+}
+#timer p{
+	margin-top: 20%;
+}
+#backimg,#backimgbreak{
+	position: absolute;
+	z-index:-1;
+	left: 0px;
+	top:400px;
+}
+
+</style>
+</head>
+<body>
+	<div id="background">
+		<h1><i>Magic Pomodoro Clock</i></h1>
+		<div id="left" class="set">
+			<p class="info">BREAK LENGTH</p>
+			<p><span id="breakDecrease" class="change">-</span><span id="breakNum">5</span><span id="breakAdd" class="change">+</span></p>
+		</div>
+		<div id="right" class="set">
+			<p class="info">SESSION LENGTH</p>
+			<p><span id="sessionDecrease" class="change">-</span><span id="sessionNum">25</span><span id="sessionAdd" class="change">+</span></p>
+		</div>
+		<div id="timer">
+			<p id="when">SESSION</p>
+			<p id="timerNum">25</p>
+			<img id="backimg" src="../../images/color.jpg" alt="#" />
+			<img id="backimgbreak" src="../../images/color1.jpg" alt="#" />
+		</div>
+
+	</div>
+<script src="../../static/scripts/jquery.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.0.0.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var $timerNum = $("#timerNum");
+	//倒计时实现
+	var flag1 = true;//处于session阶段
+	var flag2 = false;//处于break阶段
+	var flag = true;//处于倒计时初始状态
+	var number = true;//number为true表示计时，false表示暂停
+	var arr,minutes,sec,timeLeft,secshow,t,during;
+	function countdown(){
+			if(flag === true){
+				var duringstr = $("#timerNum").text();
+				during = parseInt(duringstr)*60*1000;
+				flag = false;
+			}
+			var timestr = $("#timerNum").text();
+			if(timestr.indexOf(":") < 0){
+		        minutes = parseInt(timestr);
+		        sec = 0;
+		        timeLeft = (minutes*60+sec)*1000;
+		    }
+		    if(timestr.indexOf(":") > 0){
+		    	arr = timestr.split(":");
+		        minutes = parseInt(arr[0]);
+		        sec = parseInt(arr[1]);
+		        timeLeft = (minutes*60+sec)*1000;
+		    }
+		    if(timeLeft === 0 && flag1 === true && flag2 === false){
+		    	$("#backimg").css("top","400px");
+		        $("#when").text("BREAK!");
+		        $("#timerNum").text($("#breakNum").text());
+		        flag1 = false;
+		        flag2 = true;
+		        flag = true;
+		        //countdown();
+		        //return;
+		    }else if(timeLeft === 0 && flag2 === true && flag1 === false){
+		    	$("#backimgbreak").css("top","400px");
+		        $("#when").text("SESSION");
+		        $("#timerNum").text($("#sessionNum").text());
+		        flag1 = true;//初始化，又一轮新的session和break
+		        flag2 = false;
+		        flag = true;
+		       // countdown();
+		       // return;
+		    }
+		    if(timeLeft > 0){
+				if(sec === 0){
+			    	sec = 60;
+			    	minutes = minutes-1;
+			    }
+			    $("#timerNum").text(minutes+":"+(sec-1));
+			    //背景图片高度设置
+				if(flag1 === true){
+					//alert(timeLeft);
+					var height = parseInt((timeLeft/during)*400) +"px";
+					//alert(height);
+					$("#backimg").css("top",height);
+					//$("#backimg").animate({"top": "0px"}, timeLeft);
+				}
+				if(flag2 === true){
+					var height = parseInt((timeLeft/during)*400) +"px";
+					$("#backimgbreak").css("top",height);
+					//$("#backimgbreak").animate({"top": "0px"}, timeLeft);
+				}
+			    t = setTimeout(countdown,1000);
+		    }else{
+		    	countdown();
+		    }
+
+	};
+	//清除计时
+	function countdownstop(){
+		clearTimeout(t);
+	};
+
+	$(".change").click(function() {
+		var thisId = $(this).attr("id");
+		if(thisId === "breakDecrease"){
+			var value = $("#breakNum").text();
+			if(value == 0){
+				return;
+			}
+			$("#breakNum").text(parseInt(value)-1);
+		}else if(thisId === "breakAdd"){
+			var value = $("#breakNum").text();
+			$("#breakNum").text(parseInt(value)+1);
+		}else if(thisId === "sessionDecrease"){
+			var value = $("#sessionNum").text();
+			if(value == 1){
+				return;
+			}
+			$("#sessionNum").text(parseInt(value)-1);
+			var text = $("#sessionNum").text();
+			$timerNum.text(parseInt(text));
+		}else if(thisId === "sessionAdd"){
+			var value = $("#sessionNum").text();
+			$("#sessionNum").text(parseInt(value)+1);
+			var text = $("#sessionNum").text();
+			$timerNum.text(parseInt(text));
+		}
+	});
+
+	$("#timer").click(function() {
+		if(number === true){
+			countdown();
+			number = !number;
+		}else{
+			countdownstop();
+			number = !number;
+		}
+	});
+});
+</script>
+</body>
+</html>
+

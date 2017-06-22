@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>chatroom</title>
+<link rel="shortcut icon" href="../../images/icons/site.ico" type="image/x-icon"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+body{
+	margin:0;
+	padding:0;
+	background:#fff;
+	font:100% Arial, Helvetica, sans-serif;
+	color:#555;
+	line-height:180%;
+}
+div#background{
+  width:80%;
+  height:90%;
+  margin: 0 auto;
+  background-color:#F0F0F0;
+  border: 2px solid #888;
+}
+div#screen{
+  width:90%;
+  height:500px;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color:#F0F0F0;
+  border: 2px solid #888;
+  overflow-y: auto;/*超出div后出现滚动条*/
+}
+form#danmuform{
+  width:30%;
+  height:300px;
+  margin:0 auto;
+  background-color:#F0F0F0;
+}
+input{
+	font-weight: bold;
+}
+input#send{
+	margin-left:50px;
+	float:left;
+	height: 30px;
+	width:80px;
+}
+input#clear{
+	margin-right:200px;
+	float:right;
+	height: 30px;
+	width:80px;
+}
+input#send:hover{
+	background-color: #008B45;
+	border-color: #008B45;
+	color: #fff;
+}
+input#clear:hover{
+	background-color: #EE3B3B;
+	border-color: #EE3B3B;
+	color: #fff;
+}
+p.insert{
+  margin:0px;
+  padding:0px;
+}
+</style>
+</head>
+<body>
+	<div id="background">
+		<div id="screen"></div>
+		<form id="danmuform">
+    		<span>写点什么？</span>
+			<p>姓名：<input type="text" name="username" id="username" /></p>
+			<p>内容：<textarea name="content" id="content" rows="3" cols="25"></textarea></p>
+			<input type="button" class="inputbutton" value="发送" id="send"/>
+			<input type="button" class="inputbutton" value="清屏" id="clear"/>
+		</form>
+	</div>
+
+<script src="../../static/scripts/jquery.min.js" type="text/javascript"></script>
+<script src = "https://cdn.wilddog.com/js/client/current/wilddog.js" ></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var ref = new Wilddog("https://lmagic.wilddogio.com/");
+	//将数据提交到后台野狗云
+	$("#send").click(function() {
+   var name = $("#username").val();
+   var content = $("#content").val();
+		var text = name+" : "+content;
+		ref.child('chatroom').push(text);
+		$("#content").val("");
+	});
+	//enter键触发提交
+	$("#content").keypress(function(event) {
+		if(event.keyCode =="13"){
+			$("#send").trigger('click');
+		}
+	});
+	//响应清屏事件将后台野狗云数据清空
+	//但清屏应该是客户端影藏数据，不应该动后端数据
+	$("#clear").click(function() {
+		//ref.child('chatroom').remove();
+		$("#screen").children('.insert').remove();
+	});
+	//监听后台数据变化，将变化的数据插入屏幕
+	ref.child("chatroom").on("child_added", function(datasnapshot) {
+	    var text = datasnapshot.val();
+	    var $inform = $('<p class="insert">'+text+'</p>');
+	    $inform.css('color',getRandomColor());
+	    $("#screen").append($inform);
+	    var inform = $inform[0];
+	    inform.scrollIntoView();
+	});
+
+	function getRandomColor(){
+		var randomcolor = 'rgb('+Math.floor(255*Math.random())+','+Math.floor(255*Math.random())+','+Math.floor(255*Math.random())+')';
+		return randomcolor;
+	}
+
+});
+</script>
+</body>
+</html>
+

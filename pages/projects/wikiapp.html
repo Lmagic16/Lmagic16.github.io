@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>WikiApp</title>
+<link rel="shortcut icon" href="../../images/icons/site.ico" type="image/x-icon"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" />
+<style type="text/css">
+body{
+	margin:0;
+	padding:0;
+	background-color:#282828;
+	font:160%  Arial, Helvetica, sans-serif;
+	color:#FFF;
+	position: relative;
+}
+#searchdiv{
+	position: absolute;
+	left:40%;
+	top:400px;
+}
+#searchinput{
+	background-color: #282828;
+	color: #fff;
+	border:2px solid #00CC99;
+	border-radius: 50px;
+	width: 300px;
+	height: 20px;
+	font-size: 20px;
+	padding: 10px;
+}
+#searchinput:focus{
+	outline: none;
+}
+.nodisplay{
+	display: none;
+}
+#searchicon{
+	color: #00CC99;
+	margin-left:135px;
+}
+#searchdiv>p{
+	margin-left: 50px;
+}
+#seachres{
+	position: absolute;
+	top:120px;
+	width: 70%;
+	left:15%;
+}
+.pagea{
+	display: block;
+	margin:12px;
+	background-color: #E0E0E0;
+	color: #000;
+	padding: 5px;
+	border-left: 5px solid ;
+	text-decoration: none;
+}
+.pagea:hover{
+	border-left: 5px solid #00CC99;
+}
+.fontz{
+	font-size: 15px;
+}
+.paddingp{
+	padding: 0px;
+	margin: 15px;
+}
+.spaninfo{
+	color: red;
+	font-size: 15px;
+}
+</style>
+</head>
+<body>
+	<div id="searchdiv">
+		<input type="text" id="searchinput" class="nodisplay" /><i class="fa fa-search fa-2x" id="searchicon"></i>
+		<p>Click icon to search</p>
+	</div>
+	<div id="seachres">
+	</div>
+
+<script src="../../static/scripts/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	//点击icon显示效果
+	$("#searchicon").click(function(){
+		$("#searchinput").fadeIn("slow");
+		$(this).css("margin-left",'10px');
+		$(this).removeClass('fa-2x');
+		$(this).addClass('fa-lg');
+		$("#searchinput").focus();
+	});
+	//搜索wiki条目
+	$("#searchinput").keypress(function(event) {
+		if(event.keyCode =="13"){
+			$(".pagea").remove();
+			$(".spaninfo").remove();
+			var text = $("#searchinput").val();
+			$("#searchdiv").css("top","50px");
+			$("#searchdiv>p").addClass('nodisplay');
+			var wikiUrl = "https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=";
+			var searchUrl = wikiUrl + text + "&callback=JSON_CALLBACK";
+			var page = 'http://en.wikipedia.org/?curid=';
+			if(text !=''){
+				$.ajax({
+			        url:searchUrl,
+			        type:'GET',
+			        dataType:'jsonp',
+			        headers: {'Api-User-Agent': 'Example/1.0'},
+			        success:function(data){
+			        	//是否有page结果返回
+			        	if(data.hasOwnProperty("query")){
+			        		res = data.query.pages;
+			        		$.each(res,function(key,value){
+				        		var title = value.title;
+								var pageid = value.pageid;
+								var link = page + pageid;
+								var body = value.extract;
+								var $onepage = $("<a href="+link+" class='pagea' target='_blank'></a>");
+								var $pagetitle = $("<p class='paddingp'>"+title+"</p>");
+								var $pagebody = $("<p class='fontz paddingp'>"+body+"</p>");
+								$onepage.append($pagetitle);
+								$onepage.append($pagebody);
+								$("#seachres").append($onepage);
+							});
+			        	}else{
+			        		//没有page结果返回，则插入提示信息
+			        		var $info = $("<span class='spaninfo'>No query results</span>");
+			        		$("#searchdiv").append($info);
+			        	}
+			        }
+			    });
+			}else{
+				//若文本框输入为空，则随机打开一个wiki页面
+				window.open("http://en.wikipedia.org/wiki/Special:Random")
+			}
+		}
+	});
+});
+</script>
+</body>
+</html>
+
