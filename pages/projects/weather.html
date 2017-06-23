@@ -4,13 +4,14 @@
 <title>Lmagic's Weather App</title>
 <link rel="shortcut icon" href="../../images/icons/site.ico" type="image/x-icon"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" />
 <style type="text/css">
 body{
 	margin:0;
 	padding:0;
 	background-color:#336699;
-	font:180%  "Roboto",Arial, Helvetica, sans-serif;
+	font:160%  "Roboto",Arial, Helvetica, sans-serif;
 	color:#FFF;
 }
 div#background{
@@ -19,12 +20,15 @@ div#background{
   border: 2px solid #888;
 }
 div#search{
-	width:50%;
+	width:100%;
 	margin: 0 auto;
 	text-align: center;
 }
+.container{
+    vertical-align: top;
+}
 div#info,div#serachResult{
-	width:50%;
+	width:100%;
 	margin: 0 auto;
 	text-align: center;
 }
@@ -52,6 +56,11 @@ span#errorInfo{
 	font:70% Arial, Helvetica, sans-serif;
 	color: #FF3333;
 }
+@media screen and (max-width: 767px) {
+    body{
+        font:100%  "Roboto",Arial, Helvetica, sans-serif;
+    }
+}
 </style>
 </head>
 <body>
@@ -66,7 +75,12 @@ span#errorInfo{
 			<p id='condition'></p>
 		</div>
 		<div id="search">
-			<p class="searchTemp">查询其他城市天气 :</p><input type="text" id="city" placeholder="请输入城市名"/><button><i class="fa fa-search fa-2x" aria-hidden="true"></i></button><span class="hide" id="errorInfo">未知的城市名</span>
+			<p class="searchTemp">查询其他城市天气 :</p>
+            <div class="container">
+                <input type="text" id="city" placeholder="请输入城市名"/>
+                <button><i class="fa fa-search fa-2x" aria-hidden="true"></i></button>
+            </div>
+            <span class="hide" id="errorInfo">未知的城市名</span>
 		</div>
 		<div id="serachResult" class="hide">
 			<img src="#" id="otherImg"></img>
