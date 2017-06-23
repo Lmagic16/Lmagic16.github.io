@@ -32,5 +32,45 @@ $(document).ready(function(){
             }
         }
     });
-
+    //记录网站访问次数
+    var ref = new Wilddog("https://lmagic.wilddogio.com/lmagic_club/");
+    ref.child("visitNum").once('value', function(snapshot){
+        //取出后端访问次数
+        var visitNum = snapshot.val();
+        visitNum = visitNum +1 ;
+        $("#indexInfo span").text(visitNum);
+        //将数据提交到后台野狗云
+        ref.child("visitNum").set(visitNum);
+    });
+    var cityName;
+    //获取城市名
+    $.ajax({
+        url:"http://ipinfo.io/json?",
+        type:'GET',
+        dataType:'json',
+        success:function(res){
+            cityName = res.city;
+            $("#city .text").text(cityName);
+            getTemp();
+        }
+    });
+    //通过城市名获取温度
+    function getTemp(){
+        var cityUrl = "https://free-api.heweather.com/v5/weather?key=29df2248f4de473f92cc1a49dd26efa3&city="+cityName;
+        var temp;
+        $.ajax({
+            url:cityUrl,
+            type:'GET',
+            dataType:'json',
+            success:function(data){
+                if(data.HeWeather5[0].status == "unknown city"){
+                    temp = "null";
+                }else{
+                    temp = data.HeWeather5[0].now.tmp;
+                }
+                var tempText = temp+String.fromCharCode(176)+'C';
+                $("#temp .text").text(tempText);
+            }
+        });
+    }
 });

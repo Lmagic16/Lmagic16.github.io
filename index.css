@@ -196,6 +196,12 @@ img{
 .fontsizebig{
     font-size: 5em;
 }
+#indexInfo span,#userInfo span{
+    color: #181818;
+}
+#userInfo span.outerSpan{
+    margin: 30px;
+}
 /* 项目部分 */
 .projectdiv{
     background-color: #e6e1d0;
