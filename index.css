@@ -24,6 +24,7 @@ body{
 }
 #homebodydiv{
     background-image: url(images/ps/color1.jpg);
+    background-color: #78bbbb;
 }
 #logo{
     width: 100%;
@@ -49,6 +50,7 @@ body{
     top:0px;
     box-shadow: 0 0 5px rgba(0,0,0,0.25);
     background-image: url(images/ps/color1.jpg);
+    background-color: #78bbbb;
     z-index: 999;
 }
 #navul{
