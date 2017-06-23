@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
-  <head>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lmagic的项目主页</title>
-    <link rel="shortcut icon" href="images/icons/site.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../../images/icons/site.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" />
     <link rel="stylesheet" href="projectall.css">
 </head>
@@ -140,7 +140,7 @@
             <div class="projectinfo">
                 <p class="titlep">TodoList</p>
                 <p class="infop">简介：一款简单的任务管理软件，可以用它方便地组织和安排计划。</p>
-                <p class="logicp" style="font-size: 15px;line-height: 20px;margin-top:-10px;">应用逻辑：采用vue.js。html结构大体分为三个部分：input输入框，用于用户添加todo；列表展示框，采用v-for指令循环；最下面的展示选择框：用于用户选择对todo的展示选项。其中采用vue实例中的data来维护todos列表（增删查改），对每一项任务都维护了其是否done的状态。即：把所有任务的名称状态都交给了todos对象数组。input输入框监听事件keyup.enter（增），叉叉a链接监听事件click（删），最下面的展示选择框内展示todo left是通过computed属性返回todos数组的长度，通过v-if绑定这个计算属性（查），列表展示框中的input复选框监听click事件修改todos数组中任务的isdone属性（改）。最下面的展示选择框内可选择对任务的过滤展示，展示是通过v-for。通过v-for的showtodo()函数来过滤其展示的列表。根据all active completed 三种不同情况来展示，可是showtodo()怎么知道不同的情况呢？通过vue实例的data来维护一个共用的数据X，来表示情况。showtodo()可访问，all active completed 三种不同情况的监听事件函数也可以访问。
+                <p class="logicp">应用逻辑：采用vue.js。html结构大体分为三个部分：input输入框，用于用户添加todo；列表展示框，采用v-for指令循环；最下面的展示选择框：用于用户选择对todo的展示选项。其中采用vue实例中的data来维护todos列表（增删查改），对每一项任务都维护了其是否done的状态。即：把所有任务的名称状态都交给了todos对象数组。input输入框监听事件keyup.enter（增），叉叉a链接监听事件click（删），最下面的展示选择框内展示todo left是通过computed属性返回todos数组的长度，通过v-if绑定这个计算属性（查），列表展示框中的input复选框监听click事件修改todos数组中任务的isdone属性（改）。最下面的展示选择框内可选择对任务的过滤展示，展示是通过v-for。通过v-for的showtodo()函数来过滤其展示的列表。根据all active completed 三种不同情况来展示，可是showtodo()怎么知道不同的情况呢？通过vue实例的data来维护一个共用的数据X，来表示情况。showtodo()可访问，all active completed 三种不同情况的监听事件函数也可以访问。
                 </p>
             </div>
             <a href="../projects/todolist.html" class="showa">show</a>

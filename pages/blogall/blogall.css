@@ -1,6 +1,6 @@
 @font-face{
 font-family: "BazarMedium";
-src: url(font/Bazar.ttf);
+src: url(../../font/Bazar.ttf);
 }
 body{
     background-color:#fff;
@@ -90,7 +90,7 @@ a{
     font-size: 20px;
 }
 .fontsizebig{
-    font-size: 30px;
+    font-size: 35px;
 }
 .blogdiv{
     background-color: #e3e0dd;

@@ -4,6 +4,7 @@
 <title>WikiApp</title>
 <link rel="shortcut icon" href="../../images/icons/site.ico" type="image/x-icon"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" />
 <style type="text/css">
 body{
@@ -16,7 +17,9 @@ body{
 }
 #searchdiv{
 	position: absolute;
-	left:40%;
+	width:100%;
+    text-align: center;
+    margin:0 auto;
 	top:400px;
 }
 #searchinput{
@@ -37,16 +40,12 @@ body{
 }
 #searchicon{
 	color: #00CC99;
-	margin-left:135px;
-}
-#searchdiv>p{
-	margin-left: 50px;
 }
 #seachres{
 	position: absolute;
 	top:120px;
 	width: 70%;
-	left:15%;
+	left: 15%;
 }
 .pagea{
 	display: block;
@@ -70,6 +69,18 @@ body{
 .spaninfo{
 	color: red;
 	font-size: 15px;
+}
+@media screen and (max-width: 1100px) {
+    body{
+        font:100%  Arial, Helvetica, sans-serif;
+    }
+    #searchdiv{
+        top:200px;
+    }
+    #seachres{
+        width: 100%;
+        left: 0px;
+    }
 }
 </style>
 </head>

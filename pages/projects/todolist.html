@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>My TodoList</title>
     <link rel="shortcut icon" href="../../images/icons/site.ico" type="image/x-icon"/>
     <style type="text/css">
@@ -56,6 +56,7 @@
     .tododiv>a{
       display: inline-block;
       width: 50px;
+      text-align: center;
       cursor: pointer;
     }
     .tododiv>a:hover{
@@ -77,7 +78,7 @@
       width: 300px;
       margin-left: 60px;
     }
-    .todolasta>a{
+    div.todolasta>a{
       display: inline-block;
       margin-left: 10px;
       height: 25px;
@@ -93,6 +94,28 @@
     .selected{
       text-decoration:line-through;
       color:#888;
+    }
+    @media screen and (max-width: 500px) {
+        #backgdiv{
+            margin-top: 100px;
+        }
+        #backgdiv,#todoinput{
+          width:98%;
+        }
+        .tododiv{
+            width: 95%;
+            padding-left: 10px;
+        }
+        li{
+            width: 70%;
+        }
+        body{
+          font:100%  "Roboto",Arial, Helvetica, sans-serif;
+        }
+        .todolasta{
+          width: 70%;
+          margin-left: 0px;
+        }
     }
     </style>
   </head>
