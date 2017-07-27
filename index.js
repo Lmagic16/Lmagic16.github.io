@@ -40,7 +40,7 @@ $(document).ready(function(){
         visitNum = visitNum +1 ;
         $("#indexInfo span").text(visitNum);
         //将数据提交到后台野狗云
-        ref.child("visitNum").set(visitNum);
+        /*ref.child("visitNum").set(visitNum);*/
     });
     var cityName;
     //获取城市名
