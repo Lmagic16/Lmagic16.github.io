@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="never">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>井字游戏</title>
+    <link rel="shortcut icon" href="../../images/icons/site.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" />
+<style type="text/css" media="screen">
+body {
+    font-family: "Microsoft Yahei",Helvetica,"Lucida Grande",Arial,"Hiragino Sans GB","WenQuanYi Micro Hei",sans-serif;
+    background-color: #f5f5f5;
+    color: #000;
+    text-align: center;
+}
+main{
+    background-color: #181818;
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+    margin-top: 100px;
+    color: #f5f5f5;
+    position: relative;
+}
+.grid{
+    border:2px solid #009966;
+    text-align: center;
+    font-size: 50px;
+    color: #D0D0D0;
+}
+.hide{
+    visibility: hidden;
+}
+#uwin,#aiwin{
+    font-size: 30px;
+    color: red;
+    text-align: center;
+}
+
+</style>
+</head>
+<body>
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div id="top-left" value="0" class="grid col-xs-4 col-md-4 col-lg-4 col-sm-4"></div>
+                <div id="top-center" value="1" class="grid col-xs-4 col-md-4 col-lg-4 col-sm-4"></div>
+                <div id="top-right" value="2" class="grid col-xs-4 col-md-4 col-lg-4 col-sm-4"></div>
+                <div id="center-left" value="3" class="grid col-xs-4 col-md-4 col-lg-4 col-sm-4"></div>
+                <div id="center-center" value="4" class="grid col-xs-4 col-md-4 col-lg-4 col-sm-4"></div>
+                <div id="center-right" value="5" class="grid col-xs-4 col-md-4 col-lg-4 col-sm-4"></div>
+                <div id="bottom-left" value="6" class="grid col-xs-4 col-md-4 col-lg-4 col-sm-4"></div>
+                <div id="bottom-center" value="7" class="grid col-xs-4 col-md-4 col-lg-4 col-sm-4"></div>
+                <div id="bottom-right" value="8" class="grid col-xs-4 col-md-4 col-lg-4 col-sm-4"></div>
+            </div>
+        </div>
+    </main>
+    <p class="hide" id="uwin">You Win!</p>
+    <p class="hide" id="aiwin">You Lose!</p>
+    <button id="oneMoreTime">再来一局</button>
+<script src="../../static/scripts/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    var isclick = [0,0,0,0,0,0,0,0,0];
+    var myclick = [[0,0,0],[0,0,0],[0,0,0]];
+    var aiclick = [[0,0,0],[0,0,0],[0,0,0]];
+    var winarr = [[0,0,0],[0,0,0],[0,0,0]];
+    var direct1 = [[0,-1],[-1,-1],[-1,0],[-1,1]];
+    var direct2 = [[0,1],[1,1],[1,0],[1,-1]];
+    var clickNum = 0;
+    var gridWid = $(".grid").width()+30;
+    var o = '<i class="fa fa-circle-o chesspiece" aria-hidden="true"></i>';
+    var x = '<i class="fa fa-times chesspiece" aria-hidden="true"></i>';
+    $(".grid").height(gridWid);
+    $(".grid").css('line-height', gridWid+"px");
+    $(".grid").click(function(event){
+        var index = parseInt($(event.target).attr("value"));
+        isclick[index] = 1;
+        myTurn(this,index);
+        aiTurn(isclick);
+    });
+    $("#oneMoreTime").click(function(){
+        init();
+    });
+    function myTurn(mythis,index){
+        if(clickNum < 9){
+            var $el = $(o);
+            $(mythis).append($el);
+            var row = Math.floor(index/3);
+            var col = index - row*3;
+            myclick[row][col] = 1;
+            clickNum++;
+            if(isWin(myclick,direct1,direct2,row,col) == true){
+                $("#uwin").removeClass('hide');
+            }
+        }
+    }
+    function aiTurn(isclick){
+        if(clickNum < 9){
+            var aiwinIndex = -1;
+            var mywinIndex = -1;
+            for(var i=0;i<9;i++){
+                if(isclick[i] == 0){
+                    var rindex = i;
+                    var roww = Math.floor(i/3);
+                    var coll = i - roww*3;
+                    if(isWin(aiclick,direct1,direct2,roww,coll) == true){
+                        aiwinIndex = i;
+                    }else if(isWin(myclick,direct1,direct2,roww,coll) == true){
+                        mywinIndex = i;
+                    }
+                }
+            }
+            if(aiwinIndex > -1){
+                rindex = aiwinIndex;
+            }else if(mywinIndex > -1){
+                rindex = mywinIndex;
+            }
+            isclick[rindex] = 1;
+            var row = Math.floor(rindex/3);
+            var col = rindex - row*3;
+            aiclick[row][col] = 1;
+            var $eltime = $(x);
+            $($(".row").children()[rindex]).append($eltime);
+            clickNum++;
+            if(isWin(aiclick,direct1,direct2,row,col) == true){
+                $("#aiwin").removeClass('hide');
+            }
+        }
+    }
+    function isWin(clickArr,direct1,direct2,row,col){
+        for(var i=0;i<4;i++){
+            var directx1 = direct1[i][0];
+            var directy1 = direct1[i][1];
+            var directx2 = direct2[i][0];
+            var directy2 = direct2[i][1];
+            var count1 = 1;
+            while(row+count1*directx1<3 && row+count1*directx1>=0 && col+count1*directy1<3 && col+count1*directy1>=0){
+                if(clickArr[row+count1*directx1][col+count1*directy1] == 1){
+                    count1++;
+                }else{
+                    break;
+                }
+            }
+            var count2 = 1;
+            while(row+count2*directx2<3 && row+count2*directx2>=0 && col+count2*directy2<3 && col+count2*directy2>=0){
+                if(clickArr[row+count2*directx2][col+count2*directy2] == 1){
+                    count2++;
+                }else{
+                    break;
+                }
+            }
+            var count = count1 + count2 -1;
+            if(count>=3){
+                return true;
+            }
+        }
+    }
+    function init(){
+        $(".chesspiece").remove();
+        $("#uwin").addClass('hide');
+        $("#aiwin").addClass('hide');
+        isclick = [0,0,0,0,0,0,0,0,0];
+        myclick = [[0,0,0],[0,0,0],[0,0,0]];
+        aiclick = [[0,0,0],[0,0,0],[0,0,0]];
+        clickNum = 0;
+    }
+});
+</script>
+</body>
+</html>
+
