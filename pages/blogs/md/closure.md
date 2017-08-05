@@ -66,7 +66,8 @@ for (var i=1; i<=5; i++) {
 i\*1000是每次都会计算，即1000，2000，3000，4000，5000
 我的理解：setTimeout()为异步方式，所以for循环会在很短的时间内执行完5次循环，第一次执行setTimeout(func,1000)，将会设定一个1秒的定时器，1秒之后会将func函数加入到事件队列中；第二次执行setTimeout(func,2000)，将会设定一个2秒的定时器，2秒之后会将func函数加入到事件队列中；这样输出的频率为1秒。由于for循环为同步方式，所以事件队列会等同步事件执行完再执行。而当事件队列中执行console.log(i)时，当前i会访问外层作用域，即for循环中i的值，即为6。
 备注：如果setTimeout()函数中，i\*1000改为0，则结果为同时输出6,6,6,6,6
-问题：这里只有一个闭包作用域，如果要打印出1，2，3，4，5得要这5个延迟函数，分别引用不同的i，也就是不同的作用域。所以需要创建不同的作用域。
+问题：这里只有一个闭包作用域，如果要打印出1，2，3，4，5得要这5个延迟函数，分别引用不同的i，也就是不同的作用域。所以需要创建不同的作用域。  
+
 **改写方式1**：立即执行函数能创建作用域
 <pre>
 for (var i=1; i<=5; i++) {
@@ -107,10 +108,11 @@ for (let i=1; i<=5; i++) {
 }
 </pre>
 输出：每秒一次的频率输出0,1,2,3,4,5  
-相关链接：  
-[闭包面试题](http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651552304&idx=2&sn=6abd16cf650f64cdcc12abfbb6231cbc&chksm=8025adf1b75224e789d21d12750949d3d4e9428b7f5add79aab6945c7d98cf1549da17a2b337&mpshare=1&scene=23&srcid=0729WeoziBvRKNSgKvHuBd9a#rd)  
-**相关知识**：  
-1.普通函数：
+相关链接：   
+[闭包面试题](http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651552304&idx=2&sn=6abd16cf650f64cdcc12abfbb6231cbc&chksm=8025adf1b75224e789d21d12750949d3d4e9428b7f5add79aab6945c7d98cf1549da17a2b337&mpshare=1&scene=23&srcid=0729WeoziBvRKNSgKvHuBd9a#rd)   
+   
+**相关知识**：   
+1.普通函数：   
 <pre>
 function compare(value1,value2){
 	if(value1 < value2){
