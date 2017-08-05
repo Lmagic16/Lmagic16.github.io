@@ -96,6 +96,8 @@ a{
     background-color: #e3e0dd;
     background-image: url(../../images/ps/color3.jpg);
     margin-top: 100px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.25);
+    width: 100%;
 }
 .blogdivinner{
     border:2px solid #888;
@@ -149,6 +151,9 @@ a{
 .titleback>.blogdiva>a{
     cursor: pointer;
     background-color: #C8C8C8;
+}
+.oneblogContent{
+    padding: 5px;
 }
 .titleback>.blogdiva>a:hover{
     border-bottom:2px solid #000;

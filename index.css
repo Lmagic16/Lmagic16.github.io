@@ -309,6 +309,7 @@ a,span,p{
 }
 .oneblogContent{
     clear: both;
+    padding: 5px;
 }
 .oneblog{
     font-size: 20px;
