@@ -34,7 +34,7 @@
         </div>
        <div id="blogcontentdiv">
            <div class="oneblog">
-               <div class="titleback"><h3>HTTP知识点总结</h3></div>
+               <div class="titleback"><h3>JavaScript知识点整理3—异步、回调、Promise</h3></div>
                <div id="blogMd"></div>
            </div>
        </div>
@@ -45,7 +45,7 @@
 <script src="../../static/scripts/marked.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-    $.get( "md/http.md", function(data){
+    $.get( "md/asynchronous.md", function(data){
       $("#blogMd").html(marked(data));
     });
 });
