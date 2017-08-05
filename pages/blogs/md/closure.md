@@ -1,7 +1,3 @@
-# 前端知识点整理3—作用域、闭包、模块
-日期：7.27   
-内容：作用域、闭包、模块
-
 ## 作用域
 - 作用域：根据名称查找变量的一套规则。
 - 编译的三个阶段：  
@@ -38,17 +34,17 @@ JS引擎在2和3阶段都会进行性能优化，大部分情况下编译发生�
 - 缺点：由于闭包作用域不会被垃圾回收，内存占用。
 - 优点：可以保留外部作用域对一个变量的私有引用；设计私有的方法和变量；避免全局变量的污染；
 - 实例：  
-1）闭包函数作为函数参数传递给setTimeout()  
-```  
+1）闭包函数作为函数参数传递给setTimeout() 
+<pre>
 function wait(message) {
 	 setTimeout( function timer(){
 		 console.log( message );
 	 }, 1000 );
  }
  wait( "Hello, closure!" );
-```  
+</pre> 
 2）在定时器、事件监听器、Ajax请求、跨窗口通信中，只要使用了回调函数，实际上就是在使用闭包。
-```
+<pre>
 function setupBot(name,selector) {
 	$( selector ).click( function activator(){
 		console.log( "Activating: " + name );
@@ -56,7 +52,7 @@ function setupBot(name,selector) {
 }
 setupBot( "Closure Bot 1", "#bot_1" );
 setupBot( "Closure Bot 2", "#bot_2" );
-```
+</pre>
 - **经典例子**
 1）
 ```
@@ -72,7 +68,7 @@ i\*1000是每次都会计算，即1000，2000，3000，4000，5000
 备注：如果setTimeout()函数中，i\*1000改为0，则结果为同时输出6,6,6,6,6
 问题：这里只有一个闭包作用域，如果要打印出1，2，3，4，5得要这5个延迟函数，分别引用不同的i，也就是不同的作用域。所以需要创建不同的作用域。
 **改写方式1**：立即执行函数能创建作用域
-```
+<pre>
 for (var i=1; i<=5; i++) {
 	(function(){
 		var j = i;
@@ -81,9 +77,9 @@ for (var i=1; i<=5; i++) {
 		}, j*1000 );
 	})();
 }
-```
+</pre>
 或者
-```
+<pre>
 for (var i=1; i<=5; i++) {
 	(function(j){
 		setTimeout( function timer(){
@@ -91,31 +87,31 @@ for (var i=1; i<=5; i++) {
 		}, j*1000 );
 	})( i );
 }
-```
+</pre>
 输出：每秒一次的频率输出0,1,2,3,4,5
 **改写方式2**：let可劫持块作用域
-```
+<pre>
 for (var i=1; i<=5; i++) {
 	let j = i; // 闭包的块作用域
 	setTimeout( function timer(){
 		console.log( j );
 	}, j*1000 );
 }
-```
+</pre>
 或者：for(let=i; ;)每次迭代都会产生新的let块作用域
-```
+<pre>
 for (let i=1; i<=5; i++) {
 	setTimeout( function timer(){
 		console.log( i );
 	}, i*1000 );
 }
-```
+</pre>
 输出：每秒一次的频率输出0,1,2,3,4,5  
 相关链接：  
-[闭包面试题](http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651552304&idx=2&sn=6abd16cf650f64cdcc12abfbb6231cbc&chksm=8025adf1b75224e789d21d12750949d3d4e9428b7f5add79aab6945c7d98cf1549da17a2b337&mpshare=1&scene=23&srcid=0729WeoziBvRKNSgKvHuBd9a#rd)
-**相关知识**：
+[闭包面试题](http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651552304&idx=2&sn=6abd16cf650f64cdcc12abfbb6231cbc&chksm=8025adf1b75224e789d21d12750949d3d4e9428b7f5add79aab6945c7d98cf1549da17a2b337&mpshare=1&scene=23&srcid=0729WeoziBvRKNSgKvHuBd9a#rd)  
+**相关知识**：  
 1.普通函数：
-```
+<pre>
 function compare(value1,value2){
 	if(value1 < value2){
 		return -1;
@@ -126,11 +122,11 @@ function compare(value1,value2){
 	}
 }
 var result = compare(5,10);
-```
-![函数执行时的作用域链](http://upload-images.jianshu.io/upload_images/7008018-e2bf0b3e455a59de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)  
-解释：在创建/声明compare()函数时，会创建一个预先包含全局变量对象的作用域链；当执行函数/函数被调用时，会创建一个执行环境及相应的作用域链，并且创建本地活动对象，并将其推入作用链前端；当compare()函数执行完毕后，执行环境的作用域链被销毁，compare()的活动对象已没用（标记清除或引用计数），最后被垃圾回收。
-2.闭包函数  
-```
+</pre>
+![函数执行时的作用域链](http://upload-images.jianshu.io/upload_images/7008018-e2bf0b3e455a59de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)   
+解释：在创建/声明compare()函数时，会创建一个预先包含全局变量对象的作用域链；当执行函数/函数被调用时，会创建一个执行环境及相应的作用域链，并且创建本地活动对象，并将其推入作用链前端；当compare()函数执行完毕后，执行环境的作用域链被销毁，compare()的活动对象已没用（标记清除或引用计数），最后被垃圾回收。  
+2.闭包函数   
+<pre>
 function createComparisonFunction(propertyName){
 	return function(object1,object2){
 		var value1 = object1[propertyName];
@@ -147,15 +143,15 @@ function createComparisonFunction(propertyName){
 var compareNames = createComparisonFunction("name");
 var result = compareNames({name:"Nicholas"},{name:"Greg"});
 compareNames = null; // 解除引用
-```
+</pre>
 
-![闭包函数执行时的作用域链](http://upload-images.jianshu.io/upload_images/7008018-0eb9b6b8c5728346.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-解释：当createComparisonFunction()函数执行完毕后，其执行环境的作用链被销毁，但是其活动对象依然被保留在内存中，还存在引用。直到匿名函数被销毁后，createComparisonFunction()的活动对象才会被销毁。
+![闭包函数执行时的作用域链](http://upload-images.jianshu.io/upload_images/7008018-0eb9b6b8c5728346.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)  
+解释：当createComparisonFunction()函数执行完毕后，其执行环境的作用链被销毁，但是其活动对象依然被保留在内存中，还存在引用。直到匿名函数被销毁后，createComparisonFunction()的活动对象才会被销毁。  
 
 
 ## 模块  
 - 模块函数内：声明私有变量和内部函数；内部函数可访问私有变量；返回对象，其属性为内部函数。
-```
+<pre>
 function CoolModule() {
 	var something = "cool";
 	var another = [1, 2, 3];
@@ -176,11 +172,11 @@ function CoolModule() {
 var foo = CoolModule();
 foo.doSomething(); // cool
 foo.doAnother(); // 1 ! 2 ! 3
-```
-备注：模块函数也可直接返回内部函数，例如jQuery中的$标识符就是jQuery模块的公共API。
-- **单例模式**
-当只需要一个实例时
-```
+</pre>
+备注：模块函数也可直接返回内部函数，例如jQuery中的$标识符就是jQuery模块的公共API。  
+- **单例模式**  
+当只需要一个实例时  
+<pre>
 var foo = (function CoolModule() {
 	var something = "cool";
 	var another = [1, 2, 3];
@@ -201,5 +197,5 @@ var foo = (function CoolModule() {
 
 foo.doSomething(); // cool
 foo.doAnother(); // 1 ! 2 ! 3
-```
+</pre>
 备注：将模块函数，改为立即执行函数。

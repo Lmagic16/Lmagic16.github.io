@@ -20,8 +20,8 @@ a.valueOf();\\"abc"
 ### 数组
 - 数组可容纳任何类型的值，通常通过数字进行索引，但也可包含字符串键值和属性
 - 最好使用对象存储键值/属性值，用数组存放数字索引值（内部优化）
-- 其中splice，pop/push，reverse，shift/unshift，sort会改变原始数组；
- 而contact，slice不会改变原始数组，返回的是一个新的数组副本。
+- 其中splice，pop/push，reverse，shift/unshift，sort会改变原始数组；  
+ 而contact，slice不会改变原始数组，返回的是一个新的数组副本。  
  ![Array对象方法](http://upload-images.jianshu.io/upload_images/7008018-87776ef414703195.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 

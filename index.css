@@ -304,7 +304,8 @@ a,span,p{
     height: 50px;
     float:left;
     line-height:50px;
-    width: 65%;
+    width: 75%;
+    overflow: auto;
 }
 .oneblogContent{
     clear: both;
