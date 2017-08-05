@@ -176,36 +176,22 @@ body{
         </div>
        <div id="blogcontentdiv">
            <div class="oneblog">
-               <div class="titleback"><h3>图解HTTP之https</h3></div>
-               <h3>摘要：</h3>
-               <ul>
-                   <li>在http协议中有可能存在信息窃听、身份伪装和信息篡改等安全问题.</li>
-                   <li>https是将http通信接口部分用SSL(Secure Socket Layer)和TLS(Transport Layer Security)协议代替.</li>
-                   <li>https=http+信息加密+身份认证+报文完整性保护.</li>
-               </ul>
-               <h3>内容：</h3>
-               <ul>
-                   <li>在http协议中有可能存在信息窃听、身份伪装和信息篡改等安全问题.</li>
-                   <ul>
-                       <li>通信使用明文可能会被窃听</li>
-                       <span>使用加密技术来防止信息被窃听：加密分为两种，即通信加密(信道加密)和内容加密(信源加密)</span><br />
-                       <span>加密方式分为：对称密钥加密和非对称密钥加密</span><br />
-                       <span>对称密钥加密：加密(发送方)和解密(接收方)使用同一个密钥</span><br />
-                       <li>不验证通信双方的身份可能遭遇伪装</li>
-                       <li>无法证明报文的完整性，可能已被篡改</li>
-                   </ul>
-               </ul>
+               <div class="titleback"><h3>HTTP知识点总结</h3></div>
+               <div id="blogMd"></div>
            </div>
        </div>
     </div>
     <div class="projectline" style="border-color:#e3e0dd;"><hr class="hrstyle" /></div>
   </div>
 <script src="../../static/scripts/jquery.min.js"></script>
-<!-- <script type="text/javascript">
+<script src="../../static/scripts/marked.js"></script>
+<script type="text/javascript">
 $(document).ready(function(){
-
+    $.get( "md/http.md", function(data){
+      $("#blogMd").html(marked(data));
+    });
 });
-</script> -->
+</script>
 
 </body>
 </html>
