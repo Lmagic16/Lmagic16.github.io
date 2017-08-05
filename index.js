@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var backlist = ["images/back1.jpg","images/back2.jpg","images/back3.jpg","images/back4.jpg","images/back5.jpg"];
+    var backlist = ["http://ojb21p87b.bkt.clouddn.com/back1.jpg","http://ojb21p87b.bkt.clouddn.com/back2.jpg","http://ojb21p87b.bkt.clouddn.com/back3.jpg","http://ojb21p87b.bkt.clouddn.com/back4.jpg","http://ojb21p87b.bkt.clouddn.com/back5.jpg"];
     var backinfo = ["第一张图片介绍","第二张图片介绍","第三张图片介绍","第四张图片介绍","第五张图片介绍"]
     var backNum = backlist.length;
     //图片轮播左边点击
