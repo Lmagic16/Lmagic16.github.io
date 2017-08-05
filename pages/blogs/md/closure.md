@@ -53,15 +53,15 @@ function setupBot(name,selector) {
 setupBot( "Closure Bot 1", "#bot_1" );
 setupBot( "Closure Bot 2", "#bot_2" );
 </pre>
-- **经典例子**
-1）
-```
+- **经典例子**  
+1）  
+<pre>
 for (var i=1; i<=5; i++) {
 	setTimeout( function timer(){
 		console.log( i );
 	}, i*1000 );
 }
-```
+</pre>
 输出是每秒一次的频率输出6,6,6,6,6
 i\*1000是每次都会计算，即1000，2000，3000，4000，5000
 我的理解：setTimeout()为异步方式，所以for循环会在很短的时间内执行完5次循环，第一次执行setTimeout(func,1000)，将会设定一个1秒的定时器，1秒之后会将func函数加入到事件队列中；第二次执行setTimeout(func,2000)，将会设定一个2秒的定时器，2秒之后会将func函数加入到事件队列中；这样输出的频率为1秒。由于for循环为同步方式，所以事件队列会等同步事件执行完再执行。而当事件队列中执行console.log(i)时，当前i会访问外层作用域，即for循环中i的值，即为6。
@@ -89,8 +89,8 @@ for (var i=1; i<=5; i++) {
 	})( i );
 }
 </pre>
-输出：每秒一次的频率输出0,1,2,3,4,5
-**改写方式2**：let可劫持块作用域
+输出：每秒一次的频率输出0,1,2,3,4,5  
+**改写方式2**：let可劫持块作用域  
 <pre>
 for (var i=1; i<=5; i++) {
 	let j = i; // 闭包的块作用域
@@ -175,7 +175,8 @@ var foo = CoolModule();
 foo.doSomething(); // cool
 foo.doAnother(); // 1 ! 2 ! 3
 </pre>
-备注：模块函数也可直接返回内部函数，例如jQuery中的$标识符就是jQuery模块的公共API。  
+备注：模块函数也可直接返回内部函数，例如jQuery中的$标识符就是jQuery模块的公共API。   
+
 - **单例模式**  
 当只需要一个实例时  
 <pre>
@@ -200,4 +201,5 @@ var foo = (function CoolModule() {
 foo.doSomething(); // cool
 foo.doAnother(); // 1 ! 2 ! 3
 </pre>
+
 备注：将模块函数，改为立即执行函数。

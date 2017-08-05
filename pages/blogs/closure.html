@@ -42,11 +42,10 @@
     <div class="projectline" style="border-color:#e3e0dd;"><hr class="hrstyle" /></div>
   </div>
 <script src="../../static/scripts/jquery.min.js"></script>
-<script src="../../static/scripts/marked.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-    $.get( "md/closure.md", function(data){
-      $("#blogMd").html(marked(data));
+    $.get( "html/closure.html", function(data){
+      $("#blogMd").html(data);
     });
 });
 </script>
