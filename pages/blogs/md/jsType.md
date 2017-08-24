@@ -1,32 +1,33 @@
+
 ## 类型
- - 七种内置类型：未赋值（undefined），空值（null），布尔值（boolean），数字（number），字符串（string），对象（object），符号（symbol，ES6新增）
- - 除了对象（object）都是基本简单类型
+ - 七种内置类型：未赋值（undefined），空值（null），布尔值（boolean），数字（number），字符串（string），对象（object），符号（symbol，ES6新增） 
+ - 除了对象（object）都是基本类型  
+ - 基本类型值在内存中占据固定大小的空间，被保存在栈中；引用类型的值为对象，被保存在堆中。  
  - 对象（object）包括String，Number，Boolean，Object，Function，Array，Date，RegExp，Error
- - 变量没有类型，只有值有类型，变量可以持有任何类型的值
+ - 变量没有类型，只有值有类型，变量可以持有任何类型的值  
  - typeof 运算符返回值的类型，其返回的是字符串，即typeof typeof * 为“string”
  - typeof 对未声明和未赋值（undefined）的变量都返回“undefined”（安全防范机制）
  - polyfill 指补充代码，用来补充当前运行环境中缺失的功能，例如在非ES6环境中polyfill ES6中的方法
  - JS为基本数据类型值提供了封装对象，即String，Number，Boolean等，他们也是构造函数，为该子类型提供特有的方法和属性，当基本类型值（如“abc”）需要访问属性（如length）和方法（如Sting.prototype.trim()）时，JS引擎会自动进行对象封装。
  - 最好使用基本数据类型值，而非封装对象（JS引擎已经做了预编译、缓存和性能优化）
  - valueOf()从封装对象中获取基本类型值
-
 <pre>
 var a = new String("abc");
-a.valueOf();\\"abc"  
+    a.valueOf();\\"abc"
 </pre>
-
  - Boolean()封装的对象返回值都为true
 
 ### 数组
 - 数组可容纳任何类型的值，通常通过数字进行索引，但也可包含字符串键值和属性
 - 最好使用对象存储键值/属性值，用数组存放数字索引值（内部优化）
-- 其中splice，pop/push，reverse，shift/unshift，sort会改变原始数组；  
+- 其中splice，pop/push，reverse，shift/unshift，sort会改变原始数组；
  而contact，slice不会改变原始数组，返回的是一个新的数组副本。  
- ![Array对象方法](http://upload-images.jianshu.io/upload_images/7008018-87776ef414703195.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![Array对象方法](http://upload-images.jianshu.io/upload_images/7008018-87776ef414703195.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 
 ### 字符串
-- 字符串不可变，数组可变（原因：类型决定他们在复制时，前者采用值复制，后者采用引用复制）
+- 字符串不可变，数组可变（原因：类型决定他们在复制时，前者采用值复制，后者采用引用复制）  
 ![String对象方法](http://upload-images.jianshu.io/upload_images/7008018-19e897d9e45f812a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
@@ -43,16 +44,17 @@ a.valueOf();\\"abc"
 ### 值复制 和 引用复制
 - 简单基本类型（undefined，null，boolean，number，string，symbol）采用值复制，对象（包括数组，函数等）采用引用复制
 - JS引用指向的是值，也就是说如果有一个值有10个引用，那么这10个引用相互之间没有关系，一个引用无法改变另一个引用的指向
-- slice（）不带参数会返回当前数组的一个浅复制
+- slice()不带参数会返回当前数组的一个浅复制
+- 函数传递参数时，对于对象是按照地址值传递
 
 ### 强制类型转换（显式和隐式）
-* 主要分为三种规则，ToString，ToNumber，ToBoolean
+* 主要分为三种规则，ToString，ToNumber，ToBoolean  
   1\.**ToString**   
   - 转化规则：null转换为“null”，undefined转换为“undefined”，true转换为“true”，数字转化为“数字”
   - toString()方法可以显示调用，或者在需要字符串化时自动调用
-  - 通过JSON.stringify()进行JSON字符串化，toJSON()方法返回安全的JSON值，JSON.stringify()可以传参数指定需要字符串化的属性，或者传入函数作为参数
+  - 通过JSON.stringify()进行JSON字符串化，toJSON()方法返回安全的JSON值，JSON.stringify()可以传参数指定需要字符串化的属性，或者传入函数作为参数  
   2\.**ToNumber**
-  - 转化规则：true转换为1，false转换为0，undefined转换为NaN，null转换为0，“数字”转换为数字，处理失败返回NaN
+  - 转化规则：true转换为1，false转换为0，undefined转换为NaN，null转换为0，“数字”转换为数字，处理失败返回NaN  
   3\.**ToBoolean**
   - 转化规则：undefine，null，false，+0、-0、NaN，“”这几种会转换为false，其余为true。所以，假值对象new Boolean(false)在执行ToBoolean转换时，返回true
 * **显式强制类型转换**

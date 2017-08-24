@@ -13,6 +13,24 @@ body{
     padding: 0;
     position: relative;
 }
+pre{
+    background-color: #E8E8E8;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    line-height: 19px;
+    overflow: auto;
+    padding: 6px 10px;
+    border-radius: 3px;
+}
+img{
+    max-width: 100%;
+}
+li{
+    margin: 10px;
+}
+h2,h3{
+    border-bottom: 1px solid #B8B8B8;
+}
 .fontbazar{
     color: #303030;
     font-family: "BazarMedium";
@@ -56,11 +74,13 @@ body{
 .allul>li{
     display: inline-block;
     list-style: none;
+    margin: 0px;
 }
 #navul>li{
     width: 18%;
     height: 60px;
     margin-top: 0px;
+    margin: 0px;
 }
 #navul>li>a{
     height: 60px;

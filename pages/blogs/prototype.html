@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lmagic的博客——HTTP</title>
+    <title>Lmagic的博客</title>
     <link rel="shortcut icon" href="../../images/icons/site.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" media="screen" />
     <link rel="stylesheet" href="blog.css">
@@ -34,9 +34,8 @@
         </div>
        <div id="blogcontentdiv">
            <div class="oneblog">
-               <div class="titleback"><h3>HTTP知识点总结</h3></div>
+               <div class="titleback"><h3>JS知识点整理5—原型、继承、设计模式</h3></div>
                <div id="blogMd"></div>
-               <!-- <div id="blogHtml"></div> -->
            </div>
        </div>
     </div>
@@ -46,10 +45,9 @@
 <script src="../../static/scripts/marked.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-    $.get( "md/http.md", function(data){
+    $.get( "md/prototype.md", function(data){
       $("#blogMd").html(marked(data));
     });
-   /* $("#blogHtml").load("ajaxhtml/http.html");*/
 });
 </script>
 
